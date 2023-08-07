@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/sangbin/Impala/mlruns/438766476339638546/97cac3ac5d40448b97052357106f4458/artifacts
+end_time: 1691417949984
+entry_point_name: ''
+experiment_id: '438766476339638546'
+lifecycle_stage: active
+run_id: 97cac3ac5d40448b97052357106f4458
+run_name: IMPALA_MemoryPlanningGame_57604_00000
+run_uuid: 97cac3ac5d40448b97052357106f4458
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1691417939216
+status: 3
+tags: []
+user_id: unknown

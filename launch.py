@@ -35,7 +35,7 @@ import numpy as np
 
 import ray
 from ray import air, tune
-from ray.rllib.algorithms import ppo, impala
+from ray.rllib.algorithms import impala
 from ray.rllib.examples.env.look_and_push import LookAndPush, OneHot
 from ray.rllib.examples.env.repeat_after_me_env import RepeatAfterMeEnv
 from ray.rllib.examples.env.repeat_initial_obs_env import RepeatInitialObsEnv
@@ -46,6 +46,9 @@ from ray.tune import registry
 from ray.tune.logger import pretty_print
 
 from memory_planning_game import MemoryPlanningGame
+from ray.air.integrations.mlflow import MLflowLoggerCallback
+from ray.train.torch import TorchCheckpoint, TorchPredictor
+import time
 
 tf1, tf, tfv = try_import_tf()
 SUPPORTED_ENVS = [
@@ -81,14 +84,16 @@ def get_cli_args():
         help="The DL framework specifier.",
     )
     parser.add_argument(
-        "--stop-iters", type=int, default=100000, help="Number of iterations to train."
+        "--stop-iters", type=int, default=1000000, help="Number of iterations to train."
     )
+    '''
     parser.add_argument(
         "--stop-timesteps",
         type=int,
         default=500000,
         help="Number of timesteps to train.",
     )
+    '''
     parser.add_argument(
         "--stop-reward",
         type=float,
@@ -103,6 +108,7 @@ def get_cli_args():
     )
     parser.add_argument(
         "--no-tune",
+        default=False,
         action="store_true",
         help="Run without Tune using a manual train loop instead. Here,"
         "there is no TensorBoard support.",
@@ -116,6 +122,54 @@ def get_cli_args():
     args = parser.parse_args()
     print(f"Running with following CLI args: {args}")
     return args
+
+def mlflow_log_metrics(metrics: dict, step: int):
+    import mlflow
+    while True:
+        try:
+            mlflow.log_metrics(metrics, step=step)
+            break
+        except:
+            print('Error logging metrics - will retry.')
+            time.sleep(10)
+
+def drawGraph(predictor, test_len):
+    # create env and policy
+    env = MemoryPlanningGame()
+
+    # simulate and get steps per task
+    steps_per_task = [[] for _ in range(test_len)]
+    for i in range(test_len):
+        obs = env.reset()
+        done = False
+        prev_steps = 0
+        info(f'Drawing graph: episode {i}')
+        while not done:
+            action, mets = predictor.predict(obs)
+            obs, reward, done, inf = env.step(action)
+            if reward == 1:
+                steps_per_task[i].append(inf["episode_steps"] - prev_steps)
+                prev_steps = inf["episode_steps"]
+
+    # calculate mean steps per task and log by mlflow
+    mean_steps_per_task = []
+    task = 0
+    while True:
+        lst = []
+        for i in range(test_len):
+            if len(steps_per_task[i]) > task:
+                lst.append(steps_per_task[i][task])
+        task += 1
+        
+        if len(lst) < 2:
+            break
+
+        mean_steps_per_task.append(sum(lst) / len(lst))
+
+    for i in range(len(mean_steps_per_task)):
+        mlflow_log_metrics({"number_of_steps_to_goal": mean_steps_per_task[i]}, step=i+1)
+    
+    info(f'Drawing graph finished')
 
 
 if __name__ == "__main__":
@@ -135,14 +189,11 @@ if __name__ == "__main__":
         impala.ImpalaConfig()
         .environment(
             args.env,
-            # This env_config is only used for the RepeatAfterMeEnv env.
-            env_config={"repeat_delay": 2},
+            env_config={},
         )
         .training(
-            gamma=0.99,
-            entropy_coeff=0.001,
-            num_sgd_iter=10,
-            vf_loss_coeff=1e-5,
+            lr=0.0003, #tune.grid_search([0.0001, 0.0003]),
+            grad_clip=20.0,
             model={
                 "use_attention": not args.no_attention,
                 "max_seq_len": 10,
@@ -168,15 +219,15 @@ if __name__ == "__main__":
 
     stop = {
         "training_iteration": args.stop_iters,
-        "timesteps_total": args.stop_timesteps,
+        #"timesteps_total": args.stop_timesteps,
         "episode_reward_mean": args.stop_reward,
     }
 
     # Manual training loop (no Ray tune).
     if args.no_tune:
         # manual training loop using PPO and manually keeping track of state
-        if args.run != "PPO" and args.run != "Impala":
-            raise ValueError("Only support --run PPO, Impala with --no-tune.")
+        if args.run != "IMPALA":
+            raise ValueError("Only support --run IMPALA with --no-tune.")
         algo = config.build()
         # run manual training loop and print results after each iteration
         for _ in range(args.stop_iters):
@@ -190,10 +241,10 @@ if __name__ == "__main__":
                 break
 
         # Run manual test loop (only for RepeatAfterMe env).
-        if args.env == "RepeatAfterMeEnv":
+        if args.env == "MemoryPlanningGame":
             print("Finished training. Running manual test/inference loop.")
             # prepare env
-            env = RepeatAfterMeEnv(config["env_config"])
+            env = MemoryPlanningGame()
             obs, info = env.reset()
             done = False
             total_reward = 0
@@ -201,7 +252,6 @@ if __name__ == "__main__":
             num_transformers = config["model"]["attention_num_transformer_units"]
             state = algo.get_policy().get_initial_state()
             # run one iteration until done
-            print(f"RepeatAfterMeEnv with {config['env_config']}")
             while not done:
                 action, state_out, _ = algo.compute_single_action(obs, state)
                 next_obs, reward, done, _, _ = env.step(action)
@@ -219,10 +269,28 @@ if __name__ == "__main__":
         tuner = tune.Tuner(
             args.run,
             param_space=config.to_dict(),
-            run_config=air.RunConfig(stop=stop, verbose=2),
+            run_config=air.RunConfig(
+                stop=stop, verbose=2,
+                name="mlflow",
+                callbacks=[
+                    MLflowLoggerCallback(
+                        experiment_name="mlflow_callback_example",
+                        save_artifact=True,
+                    )
+                ],
+                storage_path="./storage",
+            ),
         )
         results = tuner.fit()
+        '''
+        best_result = results.get_best_result("reward")
 
+        checkpoint: TorchCheckpoint = best_result.checkpoint
+
+        # Create a Predictor using the best result's checkpoint
+        predictor = TorchPredictor.from_checkpoint(checkpoint)
+        drawGraph(predictor, 10)
+        '''
         if args.as_test:
             print("Checking if learning goals were achieved")
             check_learning_achieved(results, args.stop_reward)
