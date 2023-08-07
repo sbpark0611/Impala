@@ -17,4 +17,4 @@ conda activate pydreamer
 export WANDB_MODE=offline
 export PYTHONPATH='.'
 
-python launch.py
+python launch.py --configs
