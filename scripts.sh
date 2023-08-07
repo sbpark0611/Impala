@@ -1,5 +1,5 @@
 #!/bin/sh
-#SBATCH -J normal_short
+#SBATCH -J impala
 #SBATCH -N 1
 #SBATCH --mem=0
 #SBATCH -n 1
