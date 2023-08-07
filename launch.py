@@ -172,126 +172,127 @@ def drawGraph(predictor, test_len):
     info(f'Drawing graph finished')
 
 
-args = get_cli_args()
+if __name__ == "__main__":
+    args = get_cli_args()
 
-ray.init(num_cpus=args.num_cpus or None, local_mode=args.local_mode)
+    ray.init(num_cpus=args.num_cpus or None, local_mode=args.local_mode)
 
-# register custom environments
-registry.register_env("RepeatAfterMeEnv", lambda c: RepeatAfterMeEnv(c))
-registry.register_env("RepeatInitialObsEnv", lambda _: RepeatInitialObsEnv())
-registry.register_env("LookAndPush", lambda _: OneHot(LookAndPush()))
-registry.register_env("StatelessCartPole", lambda _: StatelessCartPole())
-registry.register_env("MemoryPlanningGame", lambda _: MemoryPlanningGame())
+    # register custom environments
+    registry.register_env("RepeatAfterMeEnv", lambda c: RepeatAfterMeEnv(c))
+    registry.register_env("RepeatInitialObsEnv", lambda _: RepeatInitialObsEnv())
+    registry.register_env("LookAndPush", lambda _: OneHot(LookAndPush()))
+    registry.register_env("StatelessCartPole", lambda _: StatelessCartPole())
+    registry.register_env("MemoryPlanningGame", lambda _: MemoryPlanningGame())
 
-# main part: RLlib config with AttentionNet model
-config = (
-    impala.ImpalaConfig()
-    .environment(
-        args.env,
-        env_config={},
+    # main part: RLlib config with AttentionNet model
+    config = (
+        impala.ImpalaConfig()
+        .environment(
+            args.env,
+            env_config={},
+        )
+        .training(
+            lr=0.0003, #tune.grid_search([0.0001, 0.0003]),
+            grad_clip=20.0,
+            model={
+                "use_attention": not args.no_attention,
+                "max_seq_len": 10,
+                "attention_num_transformer_units": 1,
+                "attention_dim": 32,
+                "attention_memory_inference": 10,
+                "attention_memory_training": 10,
+                "attention_num_heads": 1,
+                "attention_head_dim": 32,
+                "attention_position_wise_mlp_dim": 32,
+            },
+            # TODO (Kourosh): Enable when LSTMs are supported.
+            _enable_learner_api=False,
+        )
+        .framework(args.framework)
+        .rollouts(num_envs_per_worker=20)
+        .resources(
+            # Use GPUs iff `RLLIB_NUM_GPUS` env var set to > 0.
+            num_gpus=int(os.environ.get("RLLIB_NUM_GPUS", 0))
+        )
+        .rl_module(_enable_rl_module_api=False)
     )
-    .training(
-        lr=0.0003, #tune.grid_search([0.0001, 0.0003]),
-        grad_clip=20.0,
-        model={
-            "use_attention": not args.no_attention,
-            "max_seq_len": 10,
-            "attention_num_transformer_units": 1,
-            "attention_dim": 32,
-            "attention_memory_inference": 10,
-            "attention_memory_training": 10,
-            "attention_num_heads": 1,
-            "attention_head_dim": 32,
-            "attention_position_wise_mlp_dim": 32,
-        },
-        # TODO (Kourosh): Enable when LSTMs are supported.
-        _enable_learner_api=False,
-    )
-    .framework(args.framework)
-    .rollouts(num_envs_per_worker=20)
-    .resources(
-        # Use GPUs iff `RLLIB_NUM_GPUS` env var set to > 0.
-        num_gpus=int(os.environ.get("RLLIB_NUM_GPUS", 0))
-    )
-    .rl_module(_enable_rl_module_api=False)
-)
 
-stop = {
-    "training_iteration": args.stop_iters,
-    #"timesteps_total": args.stop_timesteps,
-    "episode_reward_mean": args.stop_reward,
-}
+    stop = {
+        "training_iteration": args.stop_iters,
+        #"timesteps_total": args.stop_timesteps,
+        "episode_reward_mean": args.stop_reward,
+    }
 
-# Manual training loop (no Ray tune).
-if args.no_tune:
-    # manual training loop using PPO and manually keeping track of state
-    if args.run != "IMPALA":
-        raise ValueError("Only support --run IMPALA with --no-tune.")
-    algo = config.build()
-    # run manual training loop and print results after each iteration
-    for _ in range(args.stop_iters):
-        result = algo.train()
-        print(pretty_print(result))
-        # stop training if the target train steps or reward are reached
-        if (
-            result["timesteps_total"] >= args.stop_timesteps
-            or result["episode_reward_mean"] >= args.stop_reward
-        ):
-            break
+    # Manual training loop (no Ray tune).
+    if args.no_tune:
+        # manual training loop using PPO and manually keeping track of state
+        if args.run != "IMPALA":
+            raise ValueError("Only support --run IMPALA with --no-tune.")
+        algo = config.build()
+        # run manual training loop and print results after each iteration
+        for _ in range(args.stop_iters):
+            result = algo.train()
+            print(pretty_print(result))
+            # stop training if the target train steps or reward are reached
+            if (
+                result["timesteps_total"] >= args.stop_timesteps
+                or result["episode_reward_mean"] >= args.stop_reward
+            ):
+                break
 
-    # Run manual test loop (only for RepeatAfterMe env).
-    if args.env == "MemoryPlanningGame":
-        print("Finished training. Running manual test/inference loop.")
-        # prepare env
-        env = MemoryPlanningGame()
-        obs, info = env.reset()
-        done = False
-        total_reward = 0
-        # start with all zeros as state
-        num_transformers = config["model"]["attention_num_transformer_units"]
-        state = algo.get_policy().get_initial_state()
-        # run one iteration until done
-        while not done:
-            action, state_out, _ = algo.compute_single_action(obs, state)
-            next_obs, reward, done, _, _ = env.step(action)
-            print(f"Obs: {obs}, Action: {action}, Reward: {reward}")
-            obs = next_obs
-            total_reward += reward
-            state = [
-                np.concatenate([state[i], [state_out[i]]], axis=0)[1:]
-                for i in range(num_transformers)
-            ]
-        print(f"Total reward in test episode: {total_reward}")
+        # Run manual test loop (only for RepeatAfterMe env).
+        if args.env == "MemoryPlanningGame":
+            print("Finished training. Running manual test/inference loop.")
+            # prepare env
+            env = MemoryPlanningGame()
+            obs, info = env.reset()
+            done = False
+            total_reward = 0
+            # start with all zeros as state
+            num_transformers = config["model"]["attention_num_transformer_units"]
+            state = algo.get_policy().get_initial_state()
+            # run one iteration until done
+            while not done:
+                action, state_out, _ = algo.compute_single_action(obs, state)
+                next_obs, reward, done, _, _ = env.step(action)
+                print(f"Obs: {obs}, Action: {action}, Reward: {reward}")
+                obs = next_obs
+                total_reward += reward
+                state = [
+                    np.concatenate([state[i], [state_out[i]]], axis=0)[1:]
+                    for i in range(num_transformers)
+                ]
+            print(f"Total reward in test episode: {total_reward}")
 
-# Run with Tune for auto env and algorithm creation and TensorBoard.
-else:
-    tuner = tune.Tuner(
-        args.run,
-        param_space=config.to_dict(),
-        run_config=air.RunConfig(
-            stop=stop, verbose=2,
-            name="mlflow",
-            callbacks=[
-                MLflowLoggerCallback(
-                    experiment_name="mlflow_callback_example",
-                    save_artifact=True,
-                )
-            ],
-            storage_path="./storage",
-        ),
-    )
-    results = tuner.fit()
-    '''
-    best_result = results.get_best_result("reward")
+    # Run with Tune for auto env and algorithm creation and TensorBoard.
+    else:
+        tuner = tune.Tuner(
+            args.run,
+            param_space=config.to_dict(),
+            run_config=air.RunConfig(
+                stop=stop, verbose=2,
+                name="mlflow",
+                callbacks=[
+                    MLflowLoggerCallback(
+                        experiment_name="mlflow_callback_example",
+                        save_artifact=True,
+                    )
+                ],
+                storage_path="./storage",
+            ),
+        )
+        results = tuner.fit()
+        '''
+        best_result = results.get_best_result("reward")
 
-    checkpoint: TorchCheckpoint = best_result.checkpoint
+        checkpoint: TorchCheckpoint = best_result.checkpoint
 
-    # Create a Predictor using the best result's checkpoint
-    predictor = TorchPredictor.from_checkpoint(checkpoint)
-    drawGraph(predictor, 10)
-    '''
-    if args.as_test:
-        print("Checking if learning goals were achieved")
-        check_learning_achieved(results, args.stop_reward)
+        # Create a Predictor using the best result's checkpoint
+        predictor = TorchPredictor.from_checkpoint(checkpoint)
+        drawGraph(predictor, 10)
+        '''
+        if args.as_test:
+            print("Checking if learning goals were achieved")
+            check_learning_achieved(results, args.stop_reward)
 
-ray.shutdown()
+    ray.shutdown()
