@@ -67,6 +67,7 @@ def get_cli_args():
     # example-specific args
     parser.add_argument(
         "--no-attention",
+        default=False
         action="store_true",
         help="Do NOT use attention. For comparison: The agent will not learn.",
     )
@@ -84,7 +85,7 @@ def get_cli_args():
         help="The DL framework specifier.",
     )
     parser.add_argument(
-        "--stop-iters", type=int, default=1000000, help="Number of iterations to train."
+        "--stop-iters", type=int, default=500, help="Number of iterations to train."
     )
     '''
     parser.add_argument(
@@ -196,15 +197,16 @@ if __name__ == "__main__":
             grad_clip=20.0,
             model={
                 "use_attention": not args.no_attention,
-                "max_seq_len": 10,
                 "attention_num_transformer_units": 1,
-                "attention_dim": 32,
-                "attention_memory_inference": 10,
-                "attention_memory_training": 10,
+                "attention_dim": 16,
+                "attention_memory_inference": 1,
+                "attention_memory_training": 1,
                 "attention_num_heads": 1,
-                "attention_head_dim": 32,
-                "attention_position_wise_mlp_dim": 32,
+                "attention_head_dim": 16,
+                "attention_position_wise_mlp_dim": 16
             },
+
+            
             # TODO (Kourosh): Enable when LSTMs are supported.
             _enable_learner_api=False,
         )
@@ -215,6 +217,17 @@ if __name__ == "__main__":
             num_gpus=int(os.environ.get("RLLIB_NUM_GPUS", 0))
         )
         .rl_module(_enable_rl_module_api=False)
+        '''
+        "use_attention": not args.no_attention,
+        "max_seq_len": 10,
+        "attention_num_transformer_units": 1,
+        "attention_dim": 32,
+        "attention_memory_inference": 10,
+        "attention_memory_training": 10,
+        "attention_num_heads": 1,
+        "attention_head_dim": 32,
+        "attention_position_wise_mlp_dim": 32,
+        '''
     )
 
     stop = {
@@ -270,11 +283,11 @@ if __name__ == "__main__":
             args.run,
             param_space=config.to_dict(),
             run_config=air.RunConfig(
-                stop=stop, verbose=2,
+                stop=stop, verbose=1,
                 name="mlflow",
                 callbacks=[
                     MLflowLoggerCallback(
-                        experiment_name="mlflow_callback_example",
+                        experiment_name="impala",
                         save_artifact=True,
                     )
                 ],

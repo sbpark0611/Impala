@@ -1,1 +1,4 @@
 ray
+gymnasium
+scikit-image
+tensorflow
