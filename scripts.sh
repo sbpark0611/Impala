@@ -5,7 +5,7 @@
 #SBATCH -n 1
 #SBATCH -c 4
 #sbatch --gres=gpu:1
-#SBATCH -p jepyc
+#SBATCH -p HQ2comp
 #SBATCH -o %x.out
 #SBATCH -e %x.err
 #SBATCH -D /proj/internal_group/dscig/kdkyum/workdir/Impala
@@ -17,4 +17,4 @@ conda activate pydreamer
 export WANDB_MODE=offline
 export PYTHONPATH='.'
 
-python launch.py
+python launch.py --no-tune
