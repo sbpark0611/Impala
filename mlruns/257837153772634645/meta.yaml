@@ -1,6 +1,0 @@
-artifact_location: file:///Users/sangbin/Impala/mlruns/257837153772634645
-creation_time: 1691462638770
-experiment_id: '257837153772634645'
-last_update_time: 1691462638770
-lifecycle_stage: active
-name: mlflow_callback_example

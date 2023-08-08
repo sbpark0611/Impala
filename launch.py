@@ -49,6 +49,7 @@ from memory_planning_game import MemoryPlanningGame
 from ray.air.integrations.mlflow import MLflowLoggerCallback
 from ray.train.torch import TorchCheckpoint, TorchPredictor
 import time
+from ray.air.integrations.mlflow import setup_mlflow
 
 tf1, tf, tfv = try_import_tf()
 SUPPORTED_ENVS = [
@@ -65,12 +66,6 @@ def get_cli_args():
     parser = argparse.ArgumentParser()
 
     # example-specific args
-    parser.add_argument(
-        "--no-attention",
-        default=False
-        action="store_true",
-        help="Do NOT use attention. For comparison: The agent will not learn.",
-    )
     parser.add_argument("--env", choices=SUPPORTED_ENVS, default="MemoryPlanningGame")
 
     # general args
@@ -85,7 +80,7 @@ def get_cli_args():
         help="The DL framework specifier.",
     )
     parser.add_argument(
-        "--stop-iters", type=int, default=500, help="Number of iterations to train."
+        "--stop-iters", type=int, default=30, help="Number of iterations to train."
     )
     '''
     parser.add_argument(
@@ -124,8 +119,7 @@ def get_cli_args():
     print(f"Running with following CLI args: {args}")
     return args
 
-def mlflow_log_metrics(metrics: dict, step: int):
-    import mlflow
+def mlflow_log_metrics(mlflow, metrics: dict, step: int):
     while True:
         try:
             mlflow.log_metrics(metrics, step=step)
@@ -134,7 +128,59 @@ def mlflow_log_metrics(metrics: dict, step: int):
             print('Error logging metrics - will retry.')
             time.sleep(10)
 
-def drawGraph(predictor, test_len):
+def drawGraphWithAlgo(mlflow, algo, test_len):
+    print("Finished training. Running manual test/inference loop.")
+    # prepare env
+    env = MemoryPlanningGame()
+    
+    # simulate and get steps per task
+    steps_per_task = [[] for _ in range(test_len)]
+    for i in range(test_len):
+        obs, info = env.reset()
+        done = False
+
+        # start with all zeros as state
+        num_transformers = config["model"]["attention_num_transformer_units"]
+        state = algo.get_policy().get_initial_state()
+        state = np.array([state])
+        # run one iteration until done
+
+        prev_steps = 0
+        episode_steps = 0
+        print(f'Drawing graph: episode {i}')
+        while not done:
+            action, state_out, _ = algo.compute_single_action(obs, state)
+            next_obs, reward, done, _, _ = env.step(action)
+            episode_steps += 1
+            if reward == 1:
+                steps_per_task[i].append(episode_steps - prev_steps)
+                prev_steps = episode_steps
+            obs = next_obs
+            state = [
+                np.concatenate([state[i], [state_out[i]]], axis=0)[1:] for i in range(num_transformers)
+            ]
+    
+    # calculate mean steps per task and log by mlflow
+    mean_steps_per_task = []
+    task = 0
+    while True:
+        lst = []
+        for i in range(test_len):
+            if len(steps_per_task[i]) > task:
+                lst.append(steps_per_task[i][task])
+        task += 1
+        
+        if len(lst) < 2:
+            break
+
+        mean_steps_per_task.append(sum(lst) / len(lst))
+
+    for i in range(len(mean_steps_per_task)):
+        mlflow_log_metrics(mlflow, {"number_of_steps_to_goal": mean_steps_per_task[i]}, step=i+1)
+    
+    print(f'Drawing graph finished')
+
+def drawGraph(mlflow, predictor, test_len):
     # create env and policy
     env = MemoryPlanningGame()
 
@@ -144,13 +190,15 @@ def drawGraph(predictor, test_len):
         obs = env.reset()
         done = False
         prev_steps = 0
-        info(f'Drawing graph: episode {i}')
+        episode_steps = 0
+        print(f'Drawing graph: episode {i}')
         while not done:
             action, mets = predictor.predict(obs)
-            obs, reward, done, inf = env.step(action)
+            obs, reward, done, _, inf = env.step(action)
+            episode_steps += 1
             if reward == 1:
-                steps_per_task[i].append(inf["episode_steps"] - prev_steps)
-                prev_steps = inf["episode_steps"]
+                steps_per_task[i].append(episode_steps - prev_steps)
+                prev_steps = episode_steps
 
     # calculate mean steps per task and log by mlflow
     mean_steps_per_task = []
@@ -168,9 +216,9 @@ def drawGraph(predictor, test_len):
         mean_steps_per_task.append(sum(lst) / len(lst))
 
     for i in range(len(mean_steps_per_task)):
-        mlflow_log_metrics({"number_of_steps_to_goal": mean_steps_per_task[i]}, step=i+1)
+        mlflow_log_metrics(mlflow, {"number_of_steps_to_goal": mean_steps_per_task[i]}, step=i+1)
     
-    info(f'Drawing graph finished')
+    print(f'Drawing graph finished')
 
 
 if __name__ == "__main__":
@@ -196,17 +244,16 @@ if __name__ == "__main__":
             lr=0.0003, #tune.grid_search([0.0001, 0.0003]),
             grad_clip=20.0,
             model={
-                "use_attention": not args.no_attention,
+                "use_attention": True,
+                "max_seq_len": 10,
                 "attention_num_transformer_units": 1,
-                "attention_dim": 16,
-                "attention_memory_inference": 1,
-                "attention_memory_training": 1,
+                "attention_dim": 32,
+                "attention_memory_inference": 10,
+                "attention_memory_training": 10,
                 "attention_num_heads": 1,
-                "attention_head_dim": 16,
-                "attention_position_wise_mlp_dim": 16
+                "attention_head_dim": 32,
+                "attention_position_wise_mlp_dim": 32,
             },
-
-            
             # TODO (Kourosh): Enable when LSTMs are supported.
             _enable_learner_api=False,
         )
@@ -217,23 +264,12 @@ if __name__ == "__main__":
             num_gpus=int(os.environ.get("RLLIB_NUM_GPUS", 0))
         )
         .rl_module(_enable_rl_module_api=False)
-        '''
-        "use_attention": not args.no_attention,
-        "max_seq_len": 10,
-        "attention_num_transformer_units": 1,
-        "attention_dim": 32,
-        "attention_memory_inference": 10,
-        "attention_memory_training": 10,
-        "attention_num_heads": 1,
-        "attention_head_dim": 32,
-        "attention_position_wise_mlp_dim": 32,
-        '''
     )
 
     stop = {
         "training_iteration": args.stop_iters,
         #"timesteps_total": args.stop_timesteps,
-        "episode_reward_mean": args.stop_reward,
+        #"episode_reward_mean": args.stop_reward,
     }
 
     # Manual training loop (no Ray tune).
@@ -241,41 +277,33 @@ if __name__ == "__main__":
         # manual training loop using PPO and manually keeping track of state
         if args.run != "IMPALA":
             raise ValueError("Only support --run IMPALA with --no-tune.")
+        
+        import mlflow
+        mlflow.set_experiment("impala")
+        myMlflow = setup_mlflow(config.to_dict(), run_name = "impala_test", experiment_name="impala")
+
         algo = config.build()
         # run manual training loop and print results after each iteration
+        step = 0
         for _ in range(args.stop_iters):
+            step += 1
+            print("train step:", step)
+
             result = algo.train()
             print(pretty_print(result))
+            
+            myMlflow.log_metric('episode_reward_mean', result['episode_reward_mean'], step=step)
+
+            '''
             # stop training if the target train steps or reward are reached
             if (
                 result["timesteps_total"] >= args.stop_timesteps
                 or result["episode_reward_mean"] >= args.stop_reward
             ):
                 break
-
-        # Run manual test loop (only for RepeatAfterMe env).
-        if args.env == "MemoryPlanningGame":
-            print("Finished training. Running manual test/inference loop.")
-            # prepare env
-            env = MemoryPlanningGame()
-            obs, info = env.reset()
-            done = False
-            total_reward = 0
-            # start with all zeros as state
-            num_transformers = config["model"]["attention_num_transformer_units"]
-            state = algo.get_policy().get_initial_state()
-            # run one iteration until done
-            while not done:
-                action, state_out, _ = algo.compute_single_action(obs, state)
-                next_obs, reward, done, _, _ = env.step(action)
-                print(f"Obs: {obs}, Action: {action}, Reward: {reward}")
-                obs = next_obs
-                total_reward += reward
-                state = [
-                    np.concatenate([state[i], [state_out[i]]], axis=0)[1:]
-                    for i in range(num_transformers)
-                ]
-            print(f"Total reward in test episode: {total_reward}")
+            '''
+        
+        drawGraphWithAlgo(myMlflow, algo, 10)
 
     # Run with Tune for auto env and algorithm creation and TensorBoard.
     else:
@@ -295,15 +323,17 @@ if __name__ == "__main__":
             ),
         )
         results = tuner.fit()
-        '''
+        
         best_result = results.get_best_result("reward")
 
         checkpoint: TorchCheckpoint = best_result.checkpoint
 
+        algo = config.build()
+
         # Create a Predictor using the best result's checkpoint
-        predictor = TorchPredictor.from_checkpoint(checkpoint)
+        predictor = TorchPredictor.from_checkpoint(checkpoint, algo.get_policy())
         drawGraph(predictor, 10)
-        '''
+        
         if args.as_test:
             print("Checking if learning goals were achieved")
             check_learning_achieved(results, args.stop_reward)
