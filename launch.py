@@ -252,7 +252,7 @@ if __name__ == "__main__":
             env_config={},
         )
         .training(
-            lr=0.0002 #tune.grid_search([0.00002, 0.0002]),
+            lr=0.0002, #tune.grid_search([0.00002, 0.0002]),
             grad_clip=20.0,
             model={
                 "use_attention": True,
