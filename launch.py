@@ -255,7 +255,7 @@ if __name__ == "__main__":
             lr=0.0003, #tune.grid_search([0.0001, 0.0003]),
             grad_clip=20.0,
             model={
-                "use_attention": True,
+                "use_attention": False,
                 "max_seq_len": 1, #10,
                 "attention_num_transformer_units": 1,
                 "attention_dim": 4, #32,
