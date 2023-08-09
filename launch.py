@@ -266,13 +266,13 @@ if __name__ == "__main__":
                 "attention_position_wise_mlp_dim": 4, #32,
             },
             # TODO (Kourosh): Enable when LSTMs are supported.
-            _enable_learner_api=False,  ############################################## 이거 하면 더 잘되나????????????????????
+            _enable_learner_api=False,
         )
         .framework(args.framework)
         .rollouts(num_envs_per_worker=20)
         .resources(
             # Use GPUs iff `RLLIB_NUM_GPUS` env var set to > 0.
-            num_gpus=int(os.environ.get("RLLIB_NUM_GPUS", 0))
+            num_gpus=1#int(os.environ.get("RLLIB_NUM_GPUS", 0))
         )
         .rl_module(_enable_rl_module_api=False)
     )
