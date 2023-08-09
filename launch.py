@@ -50,6 +50,7 @@ from ray.air.integrations.mlflow import MLflowLoggerCallback
 from ray.train.torch import TorchCheckpoint, TorchPredictor
 import time
 from ray.air.integrations.mlflow import setup_mlflow
+from memory_maze import tasks
 
 tf1, tf, tfv = try_import_tf()
 SUPPORTED_ENVS = [
@@ -58,6 +59,7 @@ SUPPORTED_ENVS = [
     "LookAndPush",
     "StatelessCartPole",
     "MemoryPlanningGame",
+    "MemoryMaze",
 ]
 
 
@@ -80,7 +82,7 @@ def get_cli_args():
         help="The DL framework specifier.",
     )
     parser.add_argument(
-        "--stop-iters", type=int, default=30, help="Number of iterations to train."
+        "--stop-iters", type=int, default=100, help="Number of iterations to train."
     )
     '''
     parser.add_argument(
@@ -128,10 +130,12 @@ def mlflow_log_metrics(mlflow, metrics: dict, step: int):
             print('Error logging metrics - will retry.')
             time.sleep(10)
 
-def drawGraphWithAlgo(mlflow, algo, test_len):
-    print("Finished training. Running manual test/inference loop.")
+def drawGraphWithAlgo(mlflow, envName, algo, test_len):
     # prepare env
-    env = MemoryPlanningGame()
+    if envName == "MemoryPlanningGame":
+        env = MemoryPlanningGame()
+    elif envName == "MemoryMaze":
+        env = tasks.memory_maze_9x9()
     
     # simulate and get steps per task
     steps_per_task = [[] for _ in range(test_len)]
@@ -180,9 +184,13 @@ def drawGraphWithAlgo(mlflow, algo, test_len):
     
     print(f'Drawing graph finished')
 
-def drawGraph(mlflow, predictor, test_len):
+def drawGraph(mlflow, envName, predictor, test_len):
     # create env and policy
-    env = MemoryPlanningGame()
+    if envName == "MemoryPlanningGame":
+        env = MemoryPlanningGame()
+    elif envName == "MemoryMaze":
+        os.environ['MUJOCO_GL'] = 'glfw'
+        env = tasks.memory_maze_9x9()
 
     # simulate and get steps per task
     steps_per_task = [[] for _ in range(test_len)]
@@ -223,6 +231,8 @@ def drawGraph(mlflow, predictor, test_len):
 
 if __name__ == "__main__":
     args = get_cli_args()
+    if args.env == "MemoryMaze":
+        os.environ['MUJOCO_GL'] = 'glfw'
 
     ray.init(num_cpus=args.num_cpus or None, local_mode=args.local_mode)
 
@@ -232,6 +242,7 @@ if __name__ == "__main__":
     registry.register_env("LookAndPush", lambda _: OneHot(LookAndPush()))
     registry.register_env("StatelessCartPole", lambda _: StatelessCartPole())
     registry.register_env("MemoryPlanningGame", lambda _: MemoryPlanningGame())
+    registry.register_env("MemoryMaze", lambda _: tasks.memory_maze_9x9())
 
     # main part: RLlib config with AttentionNet model
     config = (
@@ -279,8 +290,9 @@ if __name__ == "__main__":
             raise ValueError("Only support --run IMPALA with --no-tune.")
         
         import mlflow
-        mlflow.set_experiment("impala")
-        myMlflow = setup_mlflow(config.to_dict(), run_name = "impala_test", experiment_name="impala")
+        experiment_name = "impala_GTrXl"
+        mlflow.set_experiment(experiment_name)
+        myMlflow = setup_mlflow(config.to_dict(), run_name = "memory_maze", experiment_name=experiment_name)
 
         algo = config.build()
         # run manual training loop and print results after each iteration
@@ -303,7 +315,7 @@ if __name__ == "__main__":
                 break
             '''
         
-        drawGraphWithAlgo(myMlflow, algo, 10)
+        drawGraphWithAlgo(myMlflow, args.env, algo, 10)
 
     # Run with Tune for auto env and algorithm creation and TensorBoard.
     else:
