@@ -302,7 +302,7 @@ if __name__ == "__main__":
             print("train step:", step)
 
             result = algo.train()
-            print(pretty_print(result))
+            print(pretty_print(result)) 
             
             myMlflow.log_metric('episode_reward_mean', result['episode_reward_mean'], step=step)
 
