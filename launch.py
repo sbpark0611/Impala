@@ -255,24 +255,24 @@ if __name__ == "__main__":
             lr=0.0003, #tune.grid_search([0.0001, 0.0003]),
             grad_clip=20.0,
             model={
-                "use_attention": False,
-                "max_seq_len": 1, #10,
+                "use_attention": True,
+                "max_seq_len": 10,
                 "attention_num_transformer_units": 1,
-                "attention_dim": 4, #32,
-                "attention_memory_inference": 3, #10,
-                "attention_memory_training": 3, #10,
+                "attention_dim": 32,
+                "attention_memory_inference": 10,
+                "attention_memory_training": 10,
                 "attention_num_heads": 1,
-                "attention_head_dim": 4, #32,
-                "attention_position_wise_mlp_dim": 4, #32,
+                "attention_head_dim": 32,
+                "attention_position_wise_mlp_dim": 32,
             },
             # TODO (Kourosh): Enable when LSTMs are supported.
             _enable_learner_api=False,
         )
         .framework(args.framework)
-        .rollouts(num_envs_per_worker=20)
+        .rollouts(num_envs_per_worker=1)
         .resources(
             # Use GPUs iff `RLLIB_NUM_GPUS` env var set to > 0.
-            num_gpus=1#int(os.environ.get("RLLIB_NUM_GPUS", 0))
+            num_gpus=0#int(os.environ.get("RLLIB_NUM_GPUS", 0))
         )
         .rl_module(_enable_rl_module_api=False)
     )
