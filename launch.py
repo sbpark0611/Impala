@@ -82,7 +82,7 @@ def get_cli_args():
         help="The DL framework specifier.",
     )
     parser.add_argument(
-        "--stop-iters", type=int, default=100, help="Number of iterations to train."
+        "--n-steps", type=int, default=100, help="Number of iterations to train."
     )
     '''
     parser.add_argument(
@@ -278,7 +278,7 @@ if __name__ == "__main__":
     )
 
     stop = {
-        "training_iteration": args.stop_iters,
+        "training_iteration": args.n_steps,
         #"timesteps_total": args.stop_timesteps,
         #"episode_reward_mean": args.stop_reward,
     }
@@ -297,7 +297,7 @@ if __name__ == "__main__":
         algo = config.build()
         # run manual training loop and print results after each iteration
         step = 0
-        for _ in range(args.stop_iters):
+        for _ in range(args.n_steps):
             step += 1
             print("train step:", step)
 
