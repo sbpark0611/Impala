@@ -252,18 +252,18 @@ if __name__ == "__main__":
             env_config={},
         )
         .training(
-            lr=0.0003, #tune.grid_search([0.0001, 0.0003]),
+            lr=tune.grid_search([0.00002, 0.0002]),
             grad_clip=20.0,
             model={
                 "use_attention": True,
-                "max_seq_len": 10,
+                "max_seq_len": 100,
                 "attention_num_transformer_units": 1,
-                "attention_dim": 32,
-                "attention_memory_inference": 10,
-                "attention_memory_training": 10,
+                "attention_dim": 128,
+                "attention_memory_inference": 100,
+                "attention_memory_training": 100,
                 "attention_num_heads": 1,
-                "attention_head_dim": 32,
-                "attention_position_wise_mlp_dim": 32,
+                "attention_head_dim": 64,
+                "attention_position_wise_mlp_dim": 64,
             },
             # TODO (Kourosh): Enable when LSTMs are supported.
             _enable_learner_api=False,
