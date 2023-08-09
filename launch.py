@@ -256,7 +256,7 @@ if __name__ == "__main__":
             grad_clip=20.0,
             model={
                 "use_attention": True,
-                "max_seq_len": 100,
+                "max_seq_len": 50,
                 "attention_num_transformer_units": 1,
                 "attention_dim": 128,
                 "attention_memory_inference": 100,
