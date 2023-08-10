@@ -1,10 +1,8 @@
 #!/bin/sh
 #SBATCH -J IMPALA
 #SBATCH -N 1
-#SBATCH --mem=0
 #SBATCH -n 1
-#SBATCH -c 4
-#sbatch --gres=gpu:1
+#SBATCH --gpus=2
 #SBATCH -p long
 #SBATCH -o %x.out
 #SBATCH -e %x.err
