@@ -2,8 +2,8 @@
 #SBATCH -J IMPALA
 #SBATCH -N 1
 #SBATCH -n 1
-#SBATCH --gpus=2
-#SBATCH -p long
+#SBATCH --gpus=1
+#SBATCH -p normal
 #SBATCH -o %x.out
 #SBATCH -e %x.err
 #SBATCH -D /proj/internal_group/dscig/kdkyum/workdir/Impala
