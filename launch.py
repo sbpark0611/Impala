@@ -252,7 +252,7 @@ if __name__ == "__main__":
             env_config={},
         )
         .training(
-            lr=0.0002, #tune.grid_search([0.00002, 0.0002]),
+            lr=0.0002, #tune.grid_search([0.0001, 0.0003]),
             grad_clip=20.0,
             model={
                 "use_attention": True,
@@ -331,20 +331,20 @@ if __name__ == "__main__":
                         save_artifact=True,
                     )
                 ],
-                storage_path="./storage",
+                #storage_path="./storage",
             ),
         )
         results = tuner.fit()
         
-        best_result = results.get_best_result("reward")
+        #best_result = results.get_best_result("reward")
 
-        checkpoint: TorchCheckpoint = best_result.checkpoint
+        #checkpoint: TorchCheckpoint = best_result.checkpoint
 
-        algo = config.build()
+        #algo = config.build()
 
         # Create a Predictor using the best result's checkpoint
-        predictor = TorchPredictor.from_checkpoint(checkpoint, algo.get_policy())
-        drawGraph(predictor, 10)
+        #predictor = TorchPredictor.from_checkpoint(checkpoint, algo.get_policy())
+        #drawGraph(predictor, 10)
         
         if args.as_test:
             print("Checking if learning goals were achieved")

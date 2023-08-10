@@ -5,7 +5,7 @@
 #SBATCH -n 1
 #SBATCH -c 4
 #sbatch --gres=gpu:1
-#SBATCH -p jepyc
+#SBATCH -p long
 #SBATCH -o %x.out
 #SBATCH -e %x.err
 #SBATCH -D /proj/internal_group/dscig/kdkyum/workdir/Impala
