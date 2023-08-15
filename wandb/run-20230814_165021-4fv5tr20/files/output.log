@@ -1,0 +1,278 @@
+[34m[1mwandb[39m[22m: [33mWARNING[39m Calling wandb.run.save without any arguments is deprecated.Changes to attributes are automatically persisted.
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/algorithms/algorithm.py:484: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
+`UnifiedLogger` will be removed in Ray 2.7.
+  return UnifiedLogger(config, logdir, loggers=None)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/tune/logger/unified.py:53: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
+The `JsonLogger interface is deprecated in favor of the `ray.tune.json.JsonLoggerCallback` interface and will be removed in Ray 2.7.
+  self._loggers.append(cls(self.config, self.logdir, self.trial))
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/tune/logger/unified.py:53: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
+The `CSVLogger interface is deprecated in favor of the `ray.tune.csv.CSVLoggerCallback` interface and will be removed in Ray 2.7.
+  self._loggers.append(cls(self.config, self.logdir, self.trial))
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/tune/logger/unified.py:53: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
+The `TBXLogger interface is deprecated in favor of the `ray.tune.tensorboardx.TBXLoggerCallback` interface and will be removed in Ray 2.7.
+  self._loggers.append(cls(self.config, self.logdir, self.trial))
+2023-08-14 16:50:21,912	INFO tensorboardx.py:48 -- pip install "ray[tune]" to see TensorBoard files.
+2023-08-14 16:50:21,912	WARNING unified.py:56 -- Could not instantiate TBXLogger: No module named 'tensorboardX'.
+[36m(pid=46311)[39m lz4 not available, disabling sample compression. This will significantly impact RLlib performance. To install lz4, run `pip install lz4`.
+[36m(pid=46311)[39m DeprecationWarning: `DirectStepOptimizer` has been deprecated. This will raise an error in the future!
+[36m(RolloutWorker pid=46310)[39m 2023-08-14 16:50:23,651	WARNING env.py:162 -- Your env doesn't have a .spec.max_episode_steps attribute. Your horizon will default to infinity, and your environment will not be reset.
+[36m(RolloutWorker pid=46310)[39m 2023-08-14 16:50:23,655	WARNING deprecation.py:50 -- DeprecationWarning: `LearningRateSchedule` has been deprecated. This will raise an error in the future!
+[36m(RolloutWorker pid=46310)[39m 2023-08-14 16:50:23,655	WARNING deprecation.py:50 -- DeprecationWarning: `EntropyCoeffSchedule` has been deprecated. This will raise an error in the future!
+[36m(RolloutWorker pid=46310)[39m 2023-08-14 16:50:23,657	WARNING deprecation.py:50 -- DeprecationWarning: `ray.rllib.models.torch.attention_net.AttentionWrapper` has been deprecated. This will raise an error in the future!
+[36m(RolloutWorker pid=46310)[39m 2023-08-14 16:50:23,657	WARNING deprecation.py:50 -- DeprecationWarning: `ray.rllib.models.torch.fcnet.FullyConnectedNetwork` has been deprecated. This will raise an error in the future!
+[36m(RolloutWorker pid=46310)[39m 2023-08-14 16:50:23,657	WARNING deprecation.py:50 -- DeprecationWarning: `ray.rllib.models.torch.torch_modelv2.TorchModelV2` has been deprecated. Use `ray.rllib.core.rl_module.rl_module.RLModule` instead. This will raise an error in the future!
+[36m(RolloutWorker pid=46310)[39m 2023-08-14 16:50:23,672	WARNING deprecation.py:50 -- DeprecationWarning: `ray.rllib.models.torch.attention_net.GTrXLNet` has been deprecated. This will raise an error in the future!
+[36m(RolloutWorker pid=46310)[39m 2023-08-14 16:50:23,682	WARNING deprecation.py:50 -- DeprecationWarning: `StochasticSampling` has been deprecated. This will raise an error in the future!
+[36m(RolloutWorker pid=46310)[39m 2023-08-14 16:50:23,682	WARNING deprecation.py:50 -- DeprecationWarning: `Exploration` has been deprecated. This will raise an error in the future!
+[36m(RolloutWorker pid=46310)[39m 2023-08-14 16:50:23,682	WARNING deprecation.py:50 -- DeprecationWarning: `Random` has been deprecated. This will raise an error in the future!
+[36m(RolloutWorker pid=46310)[39m 2023-08-14 16:50:23,683	WARNING deprecation.py:50 -- DeprecationWarning: `ValueNetworkMixin` has been deprecated. This will raise an error in the future!
+[36m(RolloutWorker pid=46310)[39m 2023-08-14 16:50:23,728	WARNING deprecation.py:50 -- DeprecationWarning: `ray.rllib.models.torch.torch_action_dist.TorchDistributionWrapper` has been deprecated. Use `ray.rllib.models.torch.torch_distributions.TorchCategorical` instead. This will raise an error in the future!
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/preprocessors.py:307: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  preprocessor = preprocessor_class(space, self._options)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/preprocessors.py:307: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  preprocessor = preprocessor_class(space, self._options)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/preprocessors.py:307: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  preprocessor = preprocessor_class(space, self._options)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/preprocessors.py:307: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  preprocessor = preprocessor_class(space, self._options)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/catalog.py:790: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  prep = cls(observation_space, options)
+2023-08-14 16:50:23,760	WARNING deprecation.py:50 -- DeprecationWarning: `LearningRateSchedule` has been deprecated. This will raise an error in the future!
+2023-08-14 16:50:23,760	WARNING deprecation.py:50 -- DeprecationWarning: `EntropyCoeffSchedule` has been deprecated. This will raise an error in the future!
+2023-08-14 16:50:23,762	WARNING deprecation.py:50 -- DeprecationWarning: `ray.rllib.models.torch.attention_net.AttentionWrapper` has been deprecated. This will raise an error in the future!
+2023-08-14 16:50:23,762	WARNING deprecation.py:50 -- DeprecationWarning: `ray.rllib.models.torch.fcnet.FullyConnectedNetwork` has been deprecated. This will raise an error in the future!
+2023-08-14 16:50:23,762	WARNING deprecation.py:50 -- DeprecationWarning: `ray.rllib.models.torch.torch_modelv2.TorchModelV2` has been deprecated. Use `ray.rllib.core.rl_module.rl_module.RLModule` instead. This will raise an error in the future!
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/torch/attention_net.py:281: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  super().__init__(obs_space, action_space, None, model_config, name)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/torch/attention_net.py:281: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  super().__init__(obs_space, action_space, None, model_config, name)
+2023-08-14 16:50:23,766	WARNING deprecation.py:50 -- DeprecationWarning: `ray.rllib.models.torch.attention_net.GTrXLNet` has been deprecated. This will raise an error in the future!
+2023-08-14 16:50:23,768	WARNING deprecation.py:50 -- DeprecationWarning: `StochasticSampling` has been deprecated. This will raise an error in the future!
+2023-08-14 16:50:23,768	WARNING deprecation.py:50 -- DeprecationWarning: `Exploration` has been deprecated. This will raise an error in the future!
+2023-08-14 16:50:23,769	WARNING deprecation.py:50 -- DeprecationWarning: `Random` has been deprecated. This will raise an error in the future!
+2023-08-14 16:50:23,769	WARNING deprecation.py:50 -- DeprecationWarning: `ValueNetworkMixin` has been deprecated. This will raise an error in the future!
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/preprocessors.py:307: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  preprocessor = preprocessor_class(space, self._options)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/preprocessors.py:307: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  preprocessor = preprocessor_class(space, self._options)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/preprocessors.py:307: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  preprocessor = preprocessor_class(space, self._options)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/preprocessors.py:307: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  preprocessor = preprocessor_class(space, self._options)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/modelv2.py:440: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  prep = get_preprocessor(space)(space)
+2023-08-14 16:50:23,784	WARNING deprecation.py:50 -- DeprecationWarning: `ray.rllib.models.torch.torch_action_dist.TorchDistributionWrapper` has been deprecated. Use `ray.rllib.models.torch.torch_distributions.TorchCategorical` instead. This will raise an error in the future!
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/preprocessors.py:307: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  preprocessor = preprocessor_class(space, self._options)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/preprocessors.py:307: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  preprocessor = preprocessor_class(space, self._options)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/preprocessors.py:307: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  preprocessor = preprocessor_class(space, self._options)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/preprocessors.py:307: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  preprocessor = preprocessor_class(space, self._options)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/connectors/agent/obs_preproc.py:40: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  self._preprocessor = get_preprocessor(obs_space)(
+2023-08-14 16:50:23,800	WARNING deprecation.py:50 -- DeprecationWarning: `ray.rllib.execution.multi_gpu_learner_thread.MultiGPULearnerThread` has been deprecated. This will raise an error in the future!
+2023-08-14 16:50:23,801	WARNING deprecation.py:50 -- DeprecationWarning: `ray.rllib.execution.minibatch_buffer.MinibatchBuffer` has been deprecated. This will raise an error in the future!
+2023-08-14 16:50:23,801	WARNING deprecation.py:50 -- DeprecationWarning: `ray.rllib.execution.learner_thread.LearnerThread` has been deprecated. This will raise an error in the future!
+2023-08-14 16:50:23,802	WARNING util.py:68 -- Install gputil for GPU system monitoring.
+2023-08-14 16:50:23,868	WARNING deprecation.py:50 -- DeprecationWarning: `ray.rllib.execution.replay_ops.SimpleReplayBuffer` has been deprecated. This will raise an error in the future!
+train step: 1
+Traceback (most recent call last):
+  File "/Users/sangbin/Impala/launch.py", line 328, in <module>
+    wandb.log(fd)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 390, in wrapper
+    return func(self, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 341, in wrapper_fn
+    return func(self, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 331, in wrapper
+    return func(self, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 1752, in log
+    self._log(data=data, step=step, commit=commit)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 1527, in _log
+    self._partial_history_callback(data, step, commit)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 1397, in _partial_history_callback
+    self._backend.interface.publish_partial_history(
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/wandb/sdk/interface/interface.py", line 647, in publish_partial_history
+    item.value_json = json_dumps_safer_history(v)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/wandb/util.py", line 831, in json_dumps_safer_history
+    return dumps(obj, cls=WandBHistoryJSONEncoder, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/wandb/util.py", line 796, in default
+    return json.JSONEncoder.default(self, obj)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type FlatDict is not JSON serializable
+Traceback (most recent call last):
+  File "/Users/sangbin/Impala/launch.py", line 328, in <module>
+    wandb.log(fd)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 390, in wrapper
+    return func(self, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 341, in wrapper_fn
+    return func(self, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 331, in wrapper
+    return func(self, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 1752, in log
+    self._log(data=data, step=step, commit=commit)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 1527, in _log
+    self._partial_history_callback(data, step, commit)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 1397, in _partial_history_callback
+    self._backend.interface.publish_partial_history(
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/wandb/sdk/interface/interface.py", line 647, in publish_partial_history
+    item.value_json = json_dumps_safer_history(v)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/wandb/util.py", line 831, in json_dumps_safer_history
+    return dumps(obj, cls=WandBHistoryJSONEncoder, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/wandb/util.py", line 796, in default
+    return json.JSONEncoder.default(self, obj)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type FlatDict is not JSON serializable
+agent_timesteps_total: 14100
+connector_metrics:
+  ObsPreprocessorConnector_ms: 0.019335531973624014
+  StateBufferConnector_ms: 0.0037648656346776464
+  ViewRequirementAgentConnector_ms: 0.11203890448217993
+counters:
+  num_agent_steps_sampled: 14100
+  num_agent_steps_trained: 6500
+  num_env_steps_sampled: 14100
+  num_env_steps_trained: 6500
+  num_samples_added_to_queue: 14000
+  num_training_step_calls_since_last_synch_worker_weights: 389
+  num_weight_broadcasts: 282
+custom_metrics: {}
+date: 2023-08-14_16-50-33
+done: false
+episode_len_mean: 128.0
+episode_media: {}
+episode_reward_max: 5.0
+episode_reward_mean: 1.2162162162162162
+episode_reward_min: 0.0
+episodes_this_iter: 111
+episodes_total: 111
+hostname: bagsangbins-MacBook-Air.local
+info:
+  learner:
+    default_policy:
+      custom_metrics: {}
+      diff_num_grad_updates_vs_sampler_policy: 6.2
+      learner_stats:
+        allreduce_latency: 0.0
+        cur_lr: 0.0002
+        entropy: 1.5564491748809814
+        entropy_coeff: 0.01
+        grad_gnorm: 20.0
+        policy_loss: 27.588844299316406
+        total_loss: 35.44826126098633
+        var_gnorm: 63.3246955871582
+        vf_explained_var: 0.18128657341003418
+        vf_loss: 31.283323287963867
+      model: {}
+      num_agent_steps_trained: 500.0
+      num_grad_updates_lifetime: 13.0
+  learner_queue:
+    size_count: 19
+    size_mean: 0.0
+    size_quantiles: [0.0, 0.0, 0.0, 0.0, 0.0]
+    size_std: 0.0
+  num_agent_steps_sampled: 14100
+  num_agent_steps_trained: 6500
+  num_env_steps_sampled: 14100
+  num_env_steps_trained: 6500
+  num_samples_added_to_queue: 14000
+  num_training_step_calls_since_last_synch_worker_weights: 389
+  num_weight_broadcasts: 282
+  timing_breakdown:
+    learner_dequeue_time_ms: 2971.301
+    learner_grad_time_ms: 359.769
+    learner_load_time_ms: 6.76
+    learner_load_wait_time_ms: 3.8
+iterations_since_restore: 1
+node_ip: 127.0.0.1
+num_agent_steps_sampled: 14100
+num_agent_steps_trained: 6500
+num_env_steps_sampled: 14100
+num_env_steps_sampled_this_iter: 14100
+num_env_steps_sampled_throughput_per_sec: 1409.9998319149217
+num_env_steps_trained: 6500
+num_env_steps_trained_this_iter: 6500
+num_env_steps_trained_throughput_per_sec: 649.999922513971
+num_faulty_episodes: 0
+num_healthy_workers: 2
+num_in_flight_async_reqs: 4
+num_remote_worker_restarts: 0
+num_steps_trained_this_iter: 6500
+perf:
+  cpu_util_percent: 54.186666666666675
+  ram_util_percent: 78.86
+pid: 46275
+policy_reward_max: {}
+policy_reward_mean: {}
+policy_reward_min: {}
+sampler_perf:
+  mean_action_processing_ms: 0.05508105435166769
+  mean_env_render_ms: 0.0
+  mean_env_wait_ms: 0.021264721857672173
+  mean_inference_ms: 1.051768290418901
+  mean_raw_obs_processing_ms: 0.2356973562017912
+sampler_results:
+  connector_metrics:
+    ObsPreprocessorConnector_ms: 0.019335531973624014
+    StateBufferConnector_ms: 0.0037648656346776464
+    ViewRequirementAgentConnector_ms: 0.11203890448217993
+  custom_metrics: {}
+  episode_len_mean: 128.0
+  episode_media: {}
+  episode_reward_max: 5.0
+  episode_reward_mean: 1.2162162162162162
+  episode_reward_min: 0.0
+  episodes_this_iter: 111
+  hist_stats:
+    episode_lengths: [128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128]
+    episode_reward: [1.0, 1.0, 1.0, 4.0, 1.0, 3.0, 2.0, 1.0, 1.0, 2.0, 1.0, 2.0, 0.0,
+      0.0, 4.0, 3.0, 0.0, 2.0, 1.0, 3.0, 1.0, 3.0, 1.0, 2.0, 2.0, 2.0, 5.0, 2.0, 0.0,
+      0.0, 4.0, 1.0, 2.0, 0.0, 1.0, 1.0, 1.0, 0.0, 4.0, 2.0, 3.0, 0.0, 1.0, 2.0, 1.0,
+      1.0, 2.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 2.0, 2.0, 1.0, 1.0, 2.0,
+      2.0, 1.0, 1.0, 0.0, 1.0, 2.0, 0.0, 1.0, 0.0, 2.0, 0.0, 0.0, 0.0, 2.0, 1.0, 1.0,
+      1.0, 1.0, 1.0, 2.0, 0.0, 2.0, 2.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 3.0, 0.0,
+      0.0, 3.0, 2.0, 0.0, 0.0, 3.0, 1.0, 0.0, 1.0, 1.0, 2.0, 0.0, 1.0, 0.0, 1.0, 1.0,
+      0.0, 2.0]
+  num_faulty_episodes: 0
+  policy_reward_max: {}
+  policy_reward_mean: {}
+  policy_reward_min: {}
+  sampler_perf:
+    mean_action_processing_ms: 0.05508105435166769
+    mean_env_render_ms: 0.0
+    mean_env_wait_ms: 0.021264721857672173
+    mean_inference_ms: 1.051768290418901
+    mean_raw_obs_processing_ms: 0.2356973562017912
+time_since_restore: 10.129727840423584
+time_this_iter_s: 10.129727840423584
+time_total_s: 10.129727840423584
+timers:
+  sample_time_ms: 0.013
+  synch_weights_time_ms: 0.004
+  training_iteration_time_ms: 0.039
+timestamp: 1691999433
+timesteps_total: 14100
+training_iteration: 1
+trial_id: default

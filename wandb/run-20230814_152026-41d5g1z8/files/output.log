@@ -1,0 +1,1061 @@
+[34m[1mwandb[39m[22m: [33mWARNING[39m Calling wandb.run.save without any arguments is deprecated.Changes to attributes are automatically persisted.
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/algorithms/algorithm.py:484: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
+`UnifiedLogger` will be removed in Ray 2.7.
+  return UnifiedLogger(config, logdir, loggers=None)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/tune/logger/unified.py:53: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
+The `JsonLogger interface is deprecated in favor of the `ray.tune.json.JsonLoggerCallback` interface and will be removed in Ray 2.7.
+  self._loggers.append(cls(self.config, self.logdir, self.trial))
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/tune/logger/unified.py:53: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
+The `CSVLogger interface is deprecated in favor of the `ray.tune.csv.CSVLoggerCallback` interface and will be removed in Ray 2.7.
+  self._loggers.append(cls(self.config, self.logdir, self.trial))
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/tune/logger/unified.py:53: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
+The `TBXLogger interface is deprecated in favor of the `ray.tune.tensorboardx.TBXLoggerCallback` interface and will be removed in Ray 2.7.
+  self._loggers.append(cls(self.config, self.logdir, self.trial))
+2023-08-14 15:20:27,823	INFO tensorboardx.py:48 -- pip install "ray[tune]" to see TensorBoard files.
+2023-08-14 15:20:27,823	WARNING unified.py:56 -- Could not instantiate TBXLogger: No module named 'tensorboardX'.
+[36m(pid=42392)[39m lz4 not available, disabling sample compression. This will significantly impact RLlib performance. To install lz4, run `pip install lz4`.
+[36m(pid=42392)[39m DeprecationWarning: `DirectStepOptimizer` has been deprecated. This will raise an error in the future!
+[36m(RolloutWorker pid=42391)[39m 2023-08-14 15:20:30,655	WARNING env.py:162 -- Your env doesn't have a .spec.max_episode_steps attribute. Your horizon will default to infinity, and your environment will not be reset.
+[36m(RolloutWorker pid=42391)[39m 2023-08-14 15:20:30,660	WARNING deprecation.py:50 -- DeprecationWarning: `LearningRateSchedule` has been deprecated. This will raise an error in the future!
+[36m(RolloutWorker pid=42391)[39m 2023-08-14 15:20:30,660	WARNING deprecation.py:50 -- DeprecationWarning: `EntropyCoeffSchedule` has been deprecated. This will raise an error in the future!
+[36m(RolloutWorker pid=42391)[39m 2023-08-14 15:20:30,663	WARNING deprecation.py:50 -- DeprecationWarning: `ray.rllib.models.torch.attention_net.AttentionWrapper` has been deprecated. This will raise an error in the future!
+[36m(RolloutWorker pid=42391)[39m 2023-08-14 15:20:30,663	WARNING deprecation.py:50 -- DeprecationWarning: `ray.rllib.models.torch.fcnet.FullyConnectedNetwork` has been deprecated. This will raise an error in the future!
+[36m(RolloutWorker pid=42391)[39m 2023-08-14 15:20:30,663	WARNING deprecation.py:50 -- DeprecationWarning: `ray.rllib.models.torch.torch_modelv2.TorchModelV2` has been deprecated. Use `ray.rllib.core.rl_module.rl_module.RLModule` instead. This will raise an error in the future!
+[36m(RolloutWorker pid=42391)[39m 2023-08-14 15:20:30,684	WARNING deprecation.py:50 -- DeprecationWarning: `ray.rllib.models.torch.attention_net.GTrXLNet` has been deprecated. This will raise an error in the future!
+[36m(RolloutWorker pid=42391)[39m 2023-08-14 15:20:30,697	WARNING deprecation.py:50 -- DeprecationWarning: `StochasticSampling` has been deprecated. This will raise an error in the future!
+[36m(RolloutWorker pid=42391)[39m 2023-08-14 15:20:30,697	WARNING deprecation.py:50 -- DeprecationWarning: `Exploration` has been deprecated. This will raise an error in the future!
+[36m(RolloutWorker pid=42391)[39m 2023-08-14 15:20:30,697	WARNING deprecation.py:50 -- DeprecationWarning: `Random` has been deprecated. This will raise an error in the future!
+[36m(RolloutWorker pid=42391)[39m 2023-08-14 15:20:30,698	WARNING deprecation.py:50 -- DeprecationWarning: `ValueNetworkMixin` has been deprecated. This will raise an error in the future!
+[36m(RolloutWorker pid=42391)[39m 2023-08-14 15:20:30,761	WARNING deprecation.py:50 -- DeprecationWarning: `ray.rllib.models.torch.torch_action_dist.TorchDistributionWrapper` has been deprecated. Use `ray.rllib.models.torch.torch_distributions.TorchCategorical` instead. This will raise an error in the future!
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/preprocessors.py:307: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  preprocessor = preprocessor_class(space, self._options)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/preprocessors.py:307: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  preprocessor = preprocessor_class(space, self._options)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/preprocessors.py:307: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  preprocessor = preprocessor_class(space, self._options)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/preprocessors.py:307: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  preprocessor = preprocessor_class(space, self._options)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/catalog.py:790: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  prep = cls(observation_space, options)
+2023-08-14 15:20:30,814	WARNING deprecation.py:50 -- DeprecationWarning: `LearningRateSchedule` has been deprecated. This will raise an error in the future!
+2023-08-14 15:20:30,814	WARNING deprecation.py:50 -- DeprecationWarning: `EntropyCoeffSchedule` has been deprecated. This will raise an error in the future!
+2023-08-14 15:20:30,823	WARNING deprecation.py:50 -- DeprecationWarning: `ray.rllib.models.torch.attention_net.AttentionWrapper` has been deprecated. This will raise an error in the future!
+2023-08-14 15:20:30,823	WARNING deprecation.py:50 -- DeprecationWarning: `ray.rllib.models.torch.fcnet.FullyConnectedNetwork` has been deprecated. This will raise an error in the future!
+2023-08-14 15:20:30,824	WARNING deprecation.py:50 -- DeprecationWarning: `ray.rllib.models.torch.torch_modelv2.TorchModelV2` has been deprecated. Use `ray.rllib.core.rl_module.rl_module.RLModule` instead. This will raise an error in the future!
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/torch/attention_net.py:281: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  super().__init__(obs_space, action_space, None, model_config, name)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/torch/attention_net.py:281: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  super().__init__(obs_space, action_space, None, model_config, name)
+2023-08-14 15:20:30,829	WARNING deprecation.py:50 -- DeprecationWarning: `ray.rllib.models.torch.attention_net.GTrXLNet` has been deprecated. This will raise an error in the future!
+2023-08-14 15:20:30,834	WARNING deprecation.py:50 -- DeprecationWarning: `StochasticSampling` has been deprecated. This will raise an error in the future!
+2023-08-14 15:20:30,834	WARNING deprecation.py:50 -- DeprecationWarning: `Exploration` has been deprecated. This will raise an error in the future!
+2023-08-14 15:20:30,834	WARNING deprecation.py:50 -- DeprecationWarning: `Random` has been deprecated. This will raise an error in the future!
+2023-08-14 15:20:30,835	WARNING deprecation.py:50 -- DeprecationWarning: `ValueNetworkMixin` has been deprecated. This will raise an error in the future!
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/preprocessors.py:307: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  preprocessor = preprocessor_class(space, self._options)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/preprocessors.py:307: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  preprocessor = preprocessor_class(space, self._options)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/preprocessors.py:307: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  preprocessor = preprocessor_class(space, self._options)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/preprocessors.py:307: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  preprocessor = preprocessor_class(space, self._options)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/modelv2.py:440: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  prep = get_preprocessor(space)(space)
+2023-08-14 15:20:30,855	WARNING deprecation.py:50 -- DeprecationWarning: `ray.rllib.models.torch.torch_action_dist.TorchDistributionWrapper` has been deprecated. Use `ray.rllib.models.torch.torch_distributions.TorchCategorical` instead. This will raise an error in the future!
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/preprocessors.py:307: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  preprocessor = preprocessor_class(space, self._options)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/preprocessors.py:307: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  preprocessor = preprocessor_class(space, self._options)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/preprocessors.py:307: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  preprocessor = preprocessor_class(space, self._options)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/models/preprocessors.py:307: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  preprocessor = preprocessor_class(space, self._options)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/connectors/agent/obs_preproc.py:40: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  self._preprocessor = get_preprocessor(obs_space)(
+2023-08-14 15:20:30,878	WARNING deprecation.py:50 -- DeprecationWarning: `ray.rllib.execution.multi_gpu_learner_thread.MultiGPULearnerThread` has been deprecated. This will raise an error in the future!
+2023-08-14 15:20:30,878	WARNING deprecation.py:50 -- DeprecationWarning: `ray.rllib.execution.minibatch_buffer.MinibatchBuffer` has been deprecated. This will raise an error in the future!
+2023-08-14 15:20:30,878	WARNING deprecation.py:50 -- DeprecationWarning: `ray.rllib.execution.learner_thread.LearnerThread` has been deprecated. This will raise an error in the future!
+2023-08-14 15:20:30,879	WARNING util.py:68 -- Install gputil for GPU system monitoring.
+2023-08-14 15:20:31,120	WARNING deprecation.py:50 -- DeprecationWarning: `ray.rllib.execution.replay_ops.SimpleReplayBuffer` has been deprecated. This will raise an error in the future!
+train step: 1
+agent_timesteps_total: 6500
+connector_metrics:
+  ObsPreprocessorConnector_ms: 0.036542690717256986
+  StateBufferConnector_ms: 0.0066193250509408805
+  ViewRequirementAgentConnector_ms: 0.2107844902918889
+counters:
+  num_agent_steps_sampled: 6500
+  num_agent_steps_trained: 2000
+  num_env_steps_sampled: 6500
+  num_env_steps_trained: 2000
+  num_samples_added_to_queue: 6500
+  num_training_step_calls_since_last_synch_worker_weights: 6
+  num_weight_broadcasts: 130
+custom_metrics: {}
+date: 2023-08-14_15-20-41
+done: false
+episode_len_mean: 128.0
+episode_media: {}
+episode_reward_max: 4.0
+episode_reward_mean: 1.1730769230769231
+episode_reward_min: 0.0
+episodes_this_iter: 52
+episodes_total: 52
+hostname: bagsangbins-MacBook-Air.local
+info:
+  learner:
+    default_policy:
+      custom_metrics: {}
+      diff_num_grad_updates_vs_sampler_policy: 2.8
+      learner_stats:
+        allreduce_latency: 0.0
+        cur_lr: 0.0002
+        entropy: 1.5565232038497925
+        entropy_coeff: 0.01
+        grad_gnorm: 20.0
+        policy_loss: -50.67828369140625
+        total_loss: -50.343509674072266
+        var_gnorm: 63.34987258911133
+        vf_explained_var: 0.28536248207092285
+        vf_loss: 16.23478126525879
+      model: {}
+      num_agent_steps_trained: 500.0
+      num_grad_updates_lifetime: 4.0
+  learner_queue:
+    size_count: 11
+    size_mean: 0.0
+    size_quantiles: [0.0, 0.0, 0.0, 0.0, 0.0]
+    size_std: 0.0
+  num_agent_steps_sampled: 6500
+  num_agent_steps_trained: 2000
+  num_env_steps_sampled: 6500
+  num_env_steps_trained: 2000
+  num_samples_added_to_queue: 6500
+  num_training_step_calls_since_last_synch_worker_weights: 6
+  num_weight_broadcasts: 130
+  timing_breakdown:
+    learner_dequeue_time_ms: 1005.853
+    learner_grad_time_ms: 720.349
+    learner_load_time_ms: 81.01
+    learner_load_wait_time_ms: 13.254
+iterations_since_restore: 1
+node_ip: 127.0.0.1
+num_agent_steps_sampled: 6500
+num_agent_steps_trained: 2000
+num_env_steps_sampled: 6500
+num_env_steps_sampled_this_iter: 6500
+num_env_steps_sampled_throughput_per_sec: 649.9961102241596
+num_env_steps_trained: 2000
+num_env_steps_trained_this_iter: 2000
+num_env_steps_trained_throughput_per_sec: 199.99880314589524
+num_faulty_episodes: 0
+num_healthy_workers: 2
+num_in_flight_async_reqs: 4
+num_remote_worker_restarts: 0
+num_steps_trained_this_iter: 2000
+perf:
+  cpu_util_percent: 58.45333333333333
+  ram_util_percent: 80.7
+pid: 42354
+policy_reward_max: {}
+policy_reward_mean: {}
+policy_reward_min: {}
+sampler_perf:
+  mean_action_processing_ms: 0.12613349585560174
+  mean_env_render_ms: 0.0
+  mean_env_wait_ms: 0.04698475308647372
+  mean_inference_ms: 2.291346798722903
+  mean_raw_obs_processing_ms: 0.5028146090915901
+sampler_results:
+  connector_metrics:
+    ObsPreprocessorConnector_ms: 0.036542690717256986
+    StateBufferConnector_ms: 0.0066193250509408805
+    ViewRequirementAgentConnector_ms: 0.2107844902918889
+  custom_metrics: {}
+  episode_len_mean: 128.0
+  episode_media: {}
+  episode_reward_max: 4.0
+  episode_reward_mean: 1.1730769230769231
+  episode_reward_min: 0.0
+  episodes_this_iter: 52
+  hist_stats:
+    episode_lengths: [128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128]
+    episode_reward: [1.0, 0.0, 3.0, 0.0, 1.0, 1.0, 1.0, 0.0, 2.0, 2.0, 2.0, 1.0, 1.0,
+      2.0, 1.0, 0.0, 2.0, 2.0, 3.0, 0.0, 4.0, 0.0, 1.0, 1.0, 2.0, 1.0, 0.0, 3.0, 1.0,
+      0.0, 0.0, 2.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 4.0, 2.0, 0.0, 2.0, 1.0, 3.0, 0.0,
+      2.0, 1.0, 1.0, 0.0, 3.0, 0.0, 0.0]
+  num_faulty_episodes: 0
+  policy_reward_max: {}
+  policy_reward_mean: {}
+  policy_reward_min: {}
+  sampler_perf:
+    mean_action_processing_ms: 0.12613349585560174
+    mean_env_render_ms: 0.0
+    mean_env_wait_ms: 0.04698475308647372
+    mean_inference_ms: 2.291346798722903
+    mean_raw_obs_processing_ms: 0.5028146090915901
+time_since_restore: 10.264201164245605
+time_this_iter_s: 10.264201164245605
+time_total_s: 10.264201164245605
+timers:
+  sample_time_ms: 0.096
+  synch_weights_time_ms: 0.395
+  training_iteration_time_ms: 0.671
+timestamp: 1691994041
+timesteps_total: 6500
+training_iteration: 1
+trial_id: default
+train step: 2
+agent_timesteps_total: 14400
+connector_metrics:
+  ObsPreprocessorConnector_ms: 0.034726858139038086
+  StateBufferConnector_ms: 0.006123065948486328
+  ViewRequirementAgentConnector_ms: 0.20443034172058105
+counters:
+  num_agent_steps_sampled: 14400
+  num_agent_steps_trained: 8500
+  num_env_steps_sampled: 14400
+  num_env_steps_trained: 8500
+  num_samples_added_to_queue: 14000
+  num_training_step_calls_since_last_synch_worker_weights: 225
+  num_weight_broadcasts: 285
+custom_metrics: {}
+date: 2023-08-14_15-20-51
+done: false
+episode_len_mean: 128.0
+episode_media: {}
+episode_reward_max: 4.0
+episode_reward_mean: 1.27
+episode_reward_min: 0.0
+episodes_this_iter: 62
+episodes_total: 114
+hostname: bagsangbins-MacBook-Air.local
+info:
+  learner:
+    default_policy:
+      custom_metrics: {}
+      diff_num_grad_updates_vs_sampler_policy: 4.0
+      learner_stats:
+        allreduce_latency: 0.0
+        cur_lr: 0.0002
+        entropy: 1.5597223043441772
+        entropy_coeff: 0.01
+        grad_gnorm: 20.0
+        policy_loss: 131.44300842285156
+        total_loss: 146.41102600097656
+        var_gnorm: 63.34858703613281
+        vf_explained_var: 0.41283100843429565
+        vf_loss: 45.53327560424805
+      model: {}
+      num_agent_steps_trained: 500.0
+      num_grad_updates_lifetime: 17.0
+  learner_queue:
+    size_count: 24
+    size_mean: 0.0
+    size_quantiles: [0.0, 0.0, 0.0, 0.0, 0.0]
+    size_std: 0.0
+  num_agent_steps_sampled: 14400
+  num_agent_steps_trained: 8500
+  num_env_steps_sampled: 14400
+  num_env_steps_trained: 8500
+  num_samples_added_to_queue: 14000
+  num_training_step_calls_since_last_synch_worker_weights: 225
+  num_weight_broadcasts: 285
+  timing_breakdown:
+    learner_dequeue_time_ms: 6281.907
+    learner_grad_time_ms: 616.34
+    learner_load_time_ms: 42.22
+    learner_load_wait_time_ms: 17.535
+iterations_since_restore: 2
+node_ip: 127.0.0.1
+num_agent_steps_sampled: 14400
+num_agent_steps_trained: 8500
+num_env_steps_sampled: 14400
+num_env_steps_sampled_this_iter: 7900
+num_env_steps_sampled_throughput_per_sec: 789.9996798039781
+num_env_steps_trained: 8500
+num_env_steps_trained_this_iter: 6500
+num_env_steps_trained_throughput_per_sec: 649.9997365475768
+num_faulty_episodes: 0
+num_healthy_workers: 2
+num_in_flight_async_reqs: 4
+num_remote_worker_restarts: 0
+num_steps_trained_this_iter: 6500
+perf:
+  cpu_util_percent: 54.50666666666666
+  ram_util_percent: 80.38666666666668
+pid: 42354
+policy_reward_max: {}
+policy_reward_mean: {}
+policy_reward_min: {}
+sampler_perf:
+  mean_action_processing_ms: 0.11904671444728188
+  mean_env_render_ms: 0.0
+  mean_env_wait_ms: 0.0439253784035836
+  mean_inference_ms: 2.1689526640026524
+  mean_raw_obs_processing_ms: 0.48076296574518607
+sampler_results:
+  connector_metrics:
+    ObsPreprocessorConnector_ms: 0.034726858139038086
+    StateBufferConnector_ms: 0.006123065948486328
+    ViewRequirementAgentConnector_ms: 0.20443034172058105
+  custom_metrics: {}
+  episode_len_mean: 128.0
+  episode_media: {}
+  episode_reward_max: 4.0
+  episode_reward_mean: 1.27
+  episode_reward_min: 0.0
+  episodes_this_iter: 62
+  hist_stats:
+    episode_lengths: [128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128]
+    episode_reward: [1.0, 0.0, 2.0, 2.0, 3.0, 0.0, 4.0, 0.0, 1.0, 1.0, 2.0, 1.0, 0.0,
+      3.0, 1.0, 0.0, 0.0, 2.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 4.0, 2.0, 0.0, 2.0, 1.0,
+      3.0, 0.0, 2.0, 1.0, 1.0, 0.0, 3.0, 0.0, 0.0, 0.0, 4.0, 1.0, 1.0, 1.0, 2.0, 2.0,
+      1.0, 1.0, 3.0, 0.0, 2.0, 1.0, 0.0, 1.0, 1.0, 4.0, 1.0, 3.0, 0.0, 0.0, 1.0, 0.0,
+      0.0, 3.0, 2.0, 1.0, 3.0, 1.0, 2.0, 1.0, 2.0, 0.0, 0.0, 1.0, 0.0, 3.0, 2.0, 1.0,
+      2.0, 1.0, 1.0, 2.0, 1.0, 2.0, 0.0, 1.0, 2.0, 1.0, 1.0, 2.0, 1.0, 0.0, 2.0, 2.0,
+      0.0, 1.0, 4.0, 1.0, 2.0, 1.0, 1.0]
+  num_faulty_episodes: 0
+  policy_reward_max: {}
+  policy_reward_mean: {}
+  policy_reward_min: {}
+  sampler_perf:
+    mean_action_processing_ms: 0.11904671444728188
+    mean_env_render_ms: 0.0
+    mean_env_wait_ms: 0.0439253784035836
+    mean_inference_ms: 2.1689526640026524
+    mean_raw_obs_processing_ms: 0.48076296574518607
+time_since_restore: 20.534828186035156
+time_this_iter_s: 10.27062702178955
+time_total_s: 20.534828186035156
+timers:
+  sample_time_ms: 0.024
+  synch_weights_time_ms: 0.007
+  training_iteration_time_ms: 0.074
+timestamp: 1691994051
+timesteps_total: 14400
+training_iteration: 2
+trial_id: default
+train step: 3
+agent_timesteps_total: 21300
+connector_metrics:
+  ObsPreprocessorConnector_ms: 0.03486442565917969
+  StateBufferConnector_ms: 0.006143093109130859
+  ViewRequirementAgentConnector_ms: 0.2099165916442871
+counters:
+  num_agent_steps_sampled: 21300
+  num_agent_steps_trained: 14500
+  num_env_steps_sampled: 21300
+  num_env_steps_trained: 14500
+  num_samples_added_to_queue: 21000
+  num_training_step_calls_since_last_synch_worker_weights: 674
+  num_weight_broadcasts: 420
+custom_metrics: {}
+date: 2023-08-14_15-21-01
+done: false
+episode_len_mean: 128.0
+episode_media: {}
+episode_reward_max: 5.0
+episode_reward_mean: 1.64
+episode_reward_min: 0.0
+episodes_this_iter: 52
+episodes_total: 166
+hostname: bagsangbins-MacBook-Air.local
+info:
+  learner:
+    default_policy:
+      custom_metrics: {}
+      diff_num_grad_updates_vs_sampler_policy: 11.0
+      learner_stats:
+        allreduce_latency: 0.0
+        cur_lr: 0.0002
+        entropy: 1.5264472961425781
+        entropy_coeff: 0.01
+        grad_gnorm: 20.0
+        policy_loss: -29.403705596923828
+        total_loss: -29.406822204589844
+        var_gnorm: 63.34726333618164
+        vf_explained_var: 0.42579615116119385
+        vf_loss: 15.258241653442383
+      model: {}
+      num_agent_steps_trained: 500.0
+      num_grad_updates_lifetime: 29.0
+  learner_queue:
+    size_count: 34
+    size_mean: 0.0
+    size_quantiles: [0.0, 0.0, 0.0, 0.0, 0.0]
+    size_std: 0.0
+  num_agent_steps_sampled: 21300
+  num_agent_steps_trained: 14500
+  num_env_steps_sampled: 21300
+  num_env_steps_trained: 14500
+  num_samples_added_to_queue: 21000
+  num_training_step_calls_since_last_synch_worker_weights: 674
+  num_weight_broadcasts: 420
+  timing_breakdown:
+    learner_dequeue_time_ms: 6111.128
+    learner_grad_time_ms: 1012.159
+    learner_load_time_ms: 28.883
+    learner_load_wait_time_ms: 7.727
+iterations_since_restore: 3
+node_ip: 127.0.0.1
+num_agent_steps_sampled: 21300
+num_agent_steps_trained: 14500
+num_env_steps_sampled: 21300
+num_env_steps_sampled_this_iter: 6900
+num_env_steps_sampled_throughput_per_sec: 689.9955911918058
+num_env_steps_trained: 14500
+num_env_steps_trained_this_iter: 6000
+num_env_steps_trained_throughput_per_sec: 599.9961662537443
+num_faulty_episodes: 0
+num_healthy_workers: 2
+num_in_flight_async_reqs: 4
+num_remote_worker_restarts: 0
+num_steps_trained_this_iter: 6000
+perf:
+  cpu_util_percent: 58.40714285714286
+  ram_util_percent: 81.13571428571429
+pid: 42354
+policy_reward_max: {}
+policy_reward_mean: {}
+policy_reward_min: {}
+sampler_perf:
+  mean_action_processing_ms: 0.11521547609101518
+  mean_env_render_ms: 0.0
+  mean_env_wait_ms: 0.04253593625518782
+  mean_inference_ms: 2.109940611130403
+  mean_raw_obs_processing_ms: 0.471108099677573
+sampler_results:
+  connector_metrics:
+    ObsPreprocessorConnector_ms: 0.03486442565917969
+    StateBufferConnector_ms: 0.006143093109130859
+    ViewRequirementAgentConnector_ms: 0.2099165916442871
+  custom_metrics: {}
+  episode_len_mean: 128.0
+  episode_media: {}
+  episode_reward_max: 5.0
+  episode_reward_mean: 1.64
+  episode_reward_min: 0.0
+  episodes_this_iter: 52
+  hist_stats:
+    episode_lengths: [128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128]
+    episode_reward: [1.0, 1.0, 4.0, 1.0, 3.0, 0.0, 0.0, 1.0, 0.0, 0.0, 3.0, 2.0, 1.0,
+      3.0, 1.0, 2.0, 1.0, 2.0, 0.0, 0.0, 1.0, 0.0, 3.0, 2.0, 1.0, 2.0, 1.0, 1.0, 2.0,
+      1.0, 2.0, 0.0, 1.0, 2.0, 1.0, 1.0, 2.0, 1.0, 0.0, 2.0, 2.0, 0.0, 1.0, 4.0, 1.0,
+      2.0, 1.0, 1.0, 2.0, 4.0, 0.0, 3.0, 1.0, 1.0, 2.0, 0.0, 2.0, 1.0, 4.0, 1.0, 1.0,
+      0.0, 3.0, 3.0, 1.0, 5.0, 3.0, 2.0, 2.0, 3.0, 3.0, 5.0, 4.0, 3.0, 4.0, 0.0, 0.0,
+      2.0, 2.0, 1.0, 1.0, 3.0, 1.0, 2.0, 1.0, 3.0, 0.0, 2.0, 0.0, 0.0, 1.0, 1.0, 1.0,
+      1.0, 1.0, 3.0, 3.0, 2.0, 2.0, 4.0]
+  num_faulty_episodes: 0
+  policy_reward_max: {}
+  policy_reward_mean: {}
+  policy_reward_min: {}
+  sampler_perf:
+    mean_action_processing_ms: 0.11521547609101518
+    mean_env_render_ms: 0.0
+    mean_env_wait_ms: 0.04253593625518782
+    mean_inference_ms: 2.109940611130403
+    mean_raw_obs_processing_ms: 0.471108099677573
+time_since_restore: 30.720099210739136
+time_this_iter_s: 10.18527102470398
+time_total_s: 30.720099210739136
+timers:
+  sample_time_ms: 0.028
+  synch_weights_time_ms: 0.009
+  training_iteration_time_ms: 0.086
+timestamp: 1691994061
+timesteps_total: 21300
+training_iteration: 3
+trial_id: default
+train step: 4
+agent_timesteps_total: 29300
+connector_metrics:
+  ObsPreprocessorConnector_ms: 0.03314065933227539
+  StateBufferConnector_ms: 0.0058667659759521484
+  ViewRequirementAgentConnector_ms: 0.20013785362243652
+counters:
+  num_agent_steps_sampled: 29300
+  num_agent_steps_trained: 20000
+  num_env_steps_sampled: 29300
+  num_env_steps_trained: 20000
+  num_samples_added_to_queue: 29000
+  num_training_step_calls_since_last_synch_worker_weights: 396
+  num_weight_broadcasts: 577
+custom_metrics: {}
+date: 2023-08-14_15-21-11
+done: false
+episode_len_mean: 128.0
+episode_media: {}
+episode_reward_max: 7.0
+episode_reward_mean: 1.8
+episode_reward_min: 0.0
+episodes_this_iter: 64
+episodes_total: 230
+hostname: bagsangbins-MacBook-Air.local
+info:
+  learner:
+    default_policy:
+      custom_metrics: {}
+      diff_num_grad_updates_vs_sampler_policy: 12.0
+      learner_stats:
+        allreduce_latency: 0.0
+        cur_lr: 0.0002
+        entropy: 1.5102821588516235
+        entropy_coeff: 0.01
+        grad_gnorm: 20.0
+        policy_loss: 71.34619903564453
+        total_loss: 84.97632598876953
+        var_gnorm: 63.34563446044922
+        vf_explained_var: 0.2860753536224365
+        vf_loss: 42.36307144165039
+      model: {}
+      num_agent_steps_trained: 500.0
+      num_grad_updates_lifetime: 40.0
+  learner_queue:
+    size_count: 46
+    size_mean: 0.043478260869565216
+    size_quantiles: [0.0, 0.0, 0.0, 0.0, 1.0]
+    size_std: 0.20393111999232305
+  num_agent_steps_sampled: 29300
+  num_agent_steps_trained: 20000
+  num_env_steps_sampled: 29300
+  num_env_steps_trained: 20000
+  num_samples_added_to_queue: 29000
+  num_training_step_calls_since_last_synch_worker_weights: 396
+  num_weight_broadcasts: 577
+  timing_breakdown:
+    learner_dequeue_time_ms: 5511.116
+    learner_grad_time_ms: 723.776
+    learner_load_time_ms: 28.883
+    learner_load_wait_time_ms: 21.725
+iterations_since_restore: 4
+node_ip: 127.0.0.1
+num_agent_steps_sampled: 29300
+num_agent_steps_trained: 20000
+num_env_steps_sampled: 29300
+num_env_steps_sampled_this_iter: 8000
+num_env_steps_sampled_throughput_per_sec: 799.9974250876335
+num_env_steps_trained: 20000
+num_env_steps_trained_this_iter: 5500
+num_env_steps_trained_throughput_per_sec: 549.998229747748
+num_faulty_episodes: 0
+num_healthy_workers: 2
+num_in_flight_async_reqs: 4
+num_remote_worker_restarts: 0
+num_steps_trained_this_iter: 5500
+perf:
+  cpu_util_percent: 52.11428571428572
+  ram_util_percent: 81.07857142857142
+pid: 42354
+policy_reward_max: {}
+policy_reward_mean: {}
+policy_reward_min: {}
+sampler_perf:
+  mean_action_processing_ms: 0.11369719525725916
+  mean_env_render_ms: 0.0
+  mean_env_wait_ms: 0.04192711638010497
+  mean_inference_ms: 2.086044843861956
+  mean_raw_obs_processing_ms: 0.4671609006673015
+sampler_results:
+  connector_metrics:
+    ObsPreprocessorConnector_ms: 0.03314065933227539
+    StateBufferConnector_ms: 0.0058667659759521484
+    ViewRequirementAgentConnector_ms: 0.20013785362243652
+  custom_metrics: {}
+  episode_len_mean: 128.0
+  episode_media: {}
+  episode_reward_max: 7.0
+  episode_reward_mean: 1.8
+  episode_reward_min: 0.0
+  episodes_this_iter: 64
+  hist_stats:
+    episode_lengths: [128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128]
+    episode_reward: [1.0, 5.0, 3.0, 2.0, 2.0, 3.0, 3.0, 5.0, 4.0, 3.0, 4.0, 0.0, 0.0,
+      2.0, 2.0, 1.0, 1.0, 3.0, 1.0, 2.0, 1.0, 3.0, 0.0, 2.0, 0.0, 0.0, 1.0, 1.0, 1.0,
+      1.0, 1.0, 3.0, 3.0, 2.0, 2.0, 4.0, 1.0, 1.0, 2.0, 3.0, 1.0, 0.0, 2.0, 0.0, 0.0,
+      0.0, 1.0, 3.0, 2.0, 0.0, 2.0, 2.0, 1.0, 0.0, 7.0, 2.0, 2.0, 5.0, 1.0, 0.0, 0.0,
+      2.0, 1.0, 1.0, 1.0, 4.0, 4.0, 3.0, 2.0, 1.0, 1.0, 3.0, 0.0, 2.0, 3.0, 1.0, 0.0,
+      0.0, 4.0, 4.0, 2.0, 0.0, 2.0, 1.0, 0.0, 2.0, 1.0, 0.0, 2.0, 0.0, 2.0, 5.0, 1.0,
+      0.0, 1.0, 4.0, 3.0, 1.0, 2.0, 4.0]
+  num_faulty_episodes: 0
+  policy_reward_max: {}
+  policy_reward_mean: {}
+  policy_reward_min: {}
+  sampler_perf:
+    mean_action_processing_ms: 0.11369719525725916
+    mean_env_render_ms: 0.0
+    mean_env_wait_ms: 0.04192711638010497
+    mean_inference_ms: 2.086044843861956
+    mean_raw_obs_processing_ms: 0.4671609006673015
+time_since_restore: 40.99110531806946
+time_this_iter_s: 10.271006107330322
+time_total_s: 40.99110531806946
+timers:
+  sample_time_ms: 0.028
+  synch_weights_time_ms: 0.008
+  training_iteration_time_ms: 0.086
+timestamp: 1691994071
+timesteps_total: 29300
+training_iteration: 4
+trial_id: default
+train step: 5
+agent_timesteps_total: 34700
+connector_metrics:
+  ObsPreprocessorConnector_ms: 0.039786577224731445
+  StateBufferConnector_ms: 0.006764411926269531
+  ViewRequirementAgentConnector_ms: 0.23116517066955566
+counters:
+  num_agent_steps_sampled: 34700
+  num_agent_steps_trained: 25000
+  num_env_steps_sampled: 34700
+  num_env_steps_trained: 25000
+  num_samples_added_to_queue: 34500
+  num_training_step_calls_since_last_synch_worker_weights: 0
+  num_weight_broadcasts: 682
+custom_metrics: {}
+date: 2023-08-14_15-21-22
+done: false
+episode_len_mean: 128.0
+episode_media: {}
+episode_reward_max: 7.0
+episode_reward_mean: 1.9
+episode_reward_min: 0.0
+episodes_this_iter: 41
+episodes_total: 271
+hostname: bagsangbins-MacBook-Air.local
+info:
+  learner:
+    default_policy:
+      custom_metrics: {}
+      diff_num_grad_updates_vs_sampler_policy: 13.0
+      learner_stats:
+        allreduce_latency: 0.0
+        cur_lr: 0.0002
+        entropy: 1.5156387090682983
+        entropy_coeff: 0.01
+        grad_gnorm: 20.0
+        policy_loss: -79.0802230834961
+        total_loss: -74.7370834350586
+        var_gnorm: 63.34610366821289
+        vf_explained_var: 0.30545634031295776
+        vf_loss: 23.84265899658203
+      model: {}
+      num_agent_steps_trained: 500.0
+      num_grad_updates_lifetime: 50.0
+  learner_queue:
+    size_count: 57
+    size_mean: 0.12
+    size_quantiles: [0.0, 0.0, 0.0, 0.10000000000000142, 2.0]
+    size_std: 0.38157568056677826
+  num_agent_steps_sampled: 34700
+  num_agent_steps_trained: 25000
+  num_env_steps_sampled: 34700
+  num_env_steps_trained: 25000
+  num_samples_added_to_queue: 34500
+  num_training_step_calls_since_last_synch_worker_weights: 0
+  num_weight_broadcasts: 682
+  timing_breakdown:
+    learner_dequeue_time_ms: 4990.443
+    learner_grad_time_ms: 1008.725
+    learner_load_time_ms: 26.072
+    learner_load_wait_time_ms: 35.449
+iterations_since_restore: 5
+node_ip: 127.0.0.1
+num_agent_steps_sampled: 34700
+num_agent_steps_trained: 25000
+num_env_steps_sampled: 34700
+num_env_steps_sampled_this_iter: 5400
+num_env_steps_sampled_throughput_per_sec: 539.9062248027876
+num_env_steps_trained: 25000
+num_env_steps_trained_this_iter: 5000
+num_env_steps_trained_throughput_per_sec: 499.9131711136922
+num_faulty_episodes: 0
+num_healthy_workers: 2
+num_in_flight_async_reqs: 3
+num_remote_worker_restarts: 0
+num_steps_trained_this_iter: 5000
+perf:
+  cpu_util_percent: 68.61999999999999
+  ram_util_percent: 81.74666666666667
+pid: 42354
+policy_reward_max: {}
+policy_reward_mean: {}
+policy_reward_min: {}
+sampler_perf:
+  mean_action_processing_ms: 0.11489361363630797
+  mean_env_render_ms: 0.0
+  mean_env_wait_ms: 0.04259708332226682
+  mean_inference_ms: 2.115825469338657
+  mean_raw_obs_processing_ms: 0.4733533667241612
+sampler_results:
+  connector_metrics:
+    ObsPreprocessorConnector_ms: 0.039786577224731445
+    StateBufferConnector_ms: 0.006764411926269531
+    ViewRequirementAgentConnector_ms: 0.23116517066955566
+  custom_metrics: {}
+  episode_len_mean: 128.0
+  episode_media: {}
+  episode_reward_max: 7.0
+  episode_reward_mean: 1.9
+  episode_reward_min: 0.0
+  episodes_this_iter: 41
+  hist_stats:
+    episode_lengths: [128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128]
+    episode_reward: [0.0, 2.0, 0.0, 0.0, 0.0, 1.0, 3.0, 2.0, 0.0, 2.0, 2.0, 1.0, 0.0,
+      7.0, 2.0, 2.0, 5.0, 1.0, 0.0, 0.0, 2.0, 1.0, 1.0, 1.0, 4.0, 4.0, 3.0, 2.0, 1.0,
+      1.0, 3.0, 0.0, 2.0, 3.0, 1.0, 0.0, 0.0, 4.0, 4.0, 2.0, 0.0, 2.0, 1.0, 0.0, 2.0,
+      1.0, 0.0, 2.0, 0.0, 2.0, 5.0, 1.0, 0.0, 1.0, 4.0, 3.0, 1.0, 2.0, 4.0, 1.0, 0.0,
+      2.0, 4.0, 2.0, 1.0, 2.0, 2.0, 0.0, 4.0, 1.0, 2.0, 2.0, 4.0, 3.0, 4.0, 1.0, 2.0,
+      1.0, 3.0, 0.0, 2.0, 3.0, 2.0, 0.0, 2.0, 3.0, 3.0, 2.0, 4.0, 1.0, 4.0, 2.0, 2.0,
+      2.0, 3.0, 4.0, 5.0, 1.0, 1.0, 3.0]
+  num_faulty_episodes: 0
+  policy_reward_max: {}
+  policy_reward_mean: {}
+  policy_reward_min: {}
+  sampler_perf:
+    mean_action_processing_ms: 0.11489361363630797
+    mean_env_render_ms: 0.0
+    mean_env_wait_ms: 0.04259708332226682
+    mean_inference_ms: 2.115825469338657
+    mean_raw_obs_processing_ms: 0.4733533667241612
+time_since_restore: 51.44781446456909
+time_this_iter_s: 10.456709146499634
+time_total_s: 51.44781446456909
+timers:
+  sample_time_ms: 0.088
+  synch_weights_time_ms: 0.492
+  training_iteration_time_ms: 0.71
+timestamp: 1691994082
+timesteps_total: 34700
+training_iteration: 5
+trial_id: default
+train step: 6
+agent_timesteps_total: 40850
+connector_metrics:
+  ObsPreprocessorConnector_ms: 0.04459714889526367
+  StateBufferConnector_ms: 0.007524728775024414
+  ViewRequirementAgentConnector_ms: 0.25362324714660645
+counters:
+  num_agent_steps_sampled: 40850
+  num_agent_steps_trained: 30500
+  num_env_steps_sampled: 40850
+  num_env_steps_trained: 30500
+  num_samples_added_to_queue: 40500
+  num_training_step_calls_since_last_synch_worker_weights: 483
+  num_weight_broadcasts: 803
+custom_metrics: {}
+date: 2023-08-14_15-21-32
+done: false
+episode_len_mean: 128.0
+episode_media: {}
+episode_reward_max: 5.0
+episode_reward_mean: 1.99
+episode_reward_min: 0.0
+episodes_this_iter: 49
+episodes_total: 320
+hostname: bagsangbins-MacBook-Air.local
+info:
+  learner:
+    default_policy:
+      custom_metrics: {}
+      diff_num_grad_updates_vs_sampler_policy: 13.0
+      learner_stats:
+        allreduce_latency: 0.0
+        cur_lr: 0.0002
+        entropy: 1.458459734916687
+        entropy_coeff: 0.01
+        grad_gnorm: 20.0
+        policy_loss: 17.816116333007812
+        total_loss: 23.456470489501953
+        var_gnorm: 63.346500396728516
+        vf_explained_var: 0.35891634225845337
+        vf_loss: 25.86530303955078
+      model: {}
+      num_agent_steps_trained: 500.0
+      num_grad_updates_lifetime: 61.0
+  learner_queue:
+    size_count: 67
+    size_mean: 0.3
+    size_quantiles: [0.0, 0.0, 0.0, 1.0, 3.0]
+    size_std: 0.6708203932499368
+  num_agent_steps_sampled: 40850
+  num_agent_steps_trained: 30500
+  num_env_steps_sampled: 40850
+  num_env_steps_trained: 30500
+  num_samples_added_to_queue: 40500
+  num_training_step_calls_since_last_synch_worker_weights: 483
+  num_weight_broadcasts: 803
+  timing_breakdown:
+    learner_dequeue_time_ms: 4158.704
+    learner_grad_time_ms: 1018.901
+    learner_load_time_ms: 21.4
+    learner_load_wait_time_ms: 6.167
+iterations_since_restore: 6
+node_ip: 127.0.0.1
+num_agent_steps_sampled: 40850
+num_agent_steps_trained: 30500
+num_env_steps_sampled: 40850
+num_env_steps_sampled_this_iter: 6150
+num_env_steps_sampled_throughput_per_sec: 614.9981524999806
+num_env_steps_trained: 30500
+num_env_steps_trained_this_iter: 5500
+num_env_steps_trained_throughput_per_sec: 549.9983477642103
+num_faulty_episodes: 0
+num_healthy_workers: 2
+num_in_flight_async_reqs: 4
+num_remote_worker_restarts: 0
+num_steps_trained_this_iter: 5500
+perf:
+  cpu_util_percent: 68.86666666666666
+  ram_util_percent: 83.37999999999998
+pid: 42354
+policy_reward_max: {}
+policy_reward_mean: {}
+policy_reward_min: {}
+sampler_perf:
+  mean_action_processing_ms: 0.11890523154103948
+  mean_env_render_ms: 0.0
+  mean_env_wait_ms: 0.04437783809497654
+  mean_inference_ms: 2.199303116785347
+  mean_raw_obs_processing_ms: 0.4895832145212665
+sampler_results:
+  connector_metrics:
+    ObsPreprocessorConnector_ms: 0.04459714889526367
+    StateBufferConnector_ms: 0.007524728775024414
+    ViewRequirementAgentConnector_ms: 0.25362324714660645
+  custom_metrics: {}
+  episode_len_mean: 128.0
+  episode_media: {}
+  episode_reward_max: 5.0
+  episode_reward_mean: 1.99
+  episode_reward_min: 0.0
+  episodes_this_iter: 49
+  hist_stats:
+    episode_lengths: [128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128]
+    episode_reward: [2.0, 5.0, 1.0, 0.0, 1.0, 4.0, 3.0, 1.0, 2.0, 4.0, 1.0, 0.0, 2.0,
+      4.0, 2.0, 1.0, 2.0, 2.0, 0.0, 4.0, 1.0, 2.0, 2.0, 4.0, 3.0, 4.0, 1.0, 2.0, 1.0,
+      3.0, 0.0, 2.0, 3.0, 2.0, 0.0, 2.0, 3.0, 3.0, 2.0, 4.0, 1.0, 4.0, 2.0, 2.0, 2.0,
+      3.0, 4.0, 5.0, 1.0, 1.0, 3.0, 3.0, 1.0, 4.0, 2.0, 2.0, 3.0, 3.0, 2.0, 0.0, 3.0,
+      1.0, 2.0, 2.0, 1.0, 1.0, 0.0, 2.0, 3.0, 4.0, 2.0, 2.0, 2.0, 4.0, 5.0, 1.0, 1.0,
+      1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 3.0, 0.0, 1.0, 3.0, 2.0, 2.0, 3.0,
+      0.0, 2.0, 1.0, 1.0, 5.0, 1.0, 3.0]
+  num_faulty_episodes: 0
+  policy_reward_max: {}
+  policy_reward_mean: {}
+  policy_reward_min: {}
+  sampler_perf:
+    mean_action_processing_ms: 0.11890523154103948
+    mean_env_render_ms: 0.0
+    mean_env_wait_ms: 0.04437783809497654
+    mean_inference_ms: 2.199303116785347
+    mean_raw_obs_processing_ms: 0.4895832145212665
+time_since_restore: 61.68558859825134
+time_this_iter_s: 10.237774133682251
+time_total_s: 61.68558859825134
+timers:
+  sample_time_ms: 0.03
+  synch_weights_time_ms: 0.009
+  training_iteration_time_ms: 0.09
+timestamp: 1691994092
+timesteps_total: 40850
+training_iteration: 6
+trial_id: default
+train step: 7
+agent_timesteps_total: 48200
+connector_metrics:
+  ObsPreprocessorConnector_ms: 0.03655862808227539
+  StateBufferConnector_ms: 0.00655674934387207
+  ViewRequirementAgentConnector_ms: 0.2174673080444336
+counters:
+  num_agent_steps_sampled: 48200
+  num_agent_steps_trained: 36000
+  num_env_steps_sampled: 48200
+  num_env_steps_trained: 36000
+  num_samples_added_to_queue: 48000
+  num_training_step_calls_since_last_synch_worker_weights: 234
+  num_weight_broadcasts: 947
+custom_metrics: {}
+date: 2023-08-14_15-21-42
+done: false
+episode_len_mean: 128.0
+episode_media: {}
+episode_reward_max: 7.0
+episode_reward_mean: 2.07
+episode_reward_min: 0.0
+episodes_this_iter: 57
+episodes_total: 377
+hostname: bagsangbins-MacBook-Air.local
+info:
+  learner:
+    default_policy:
+      custom_metrics: {}
+      diff_num_grad_updates_vs_sampler_policy: 31.200000000000003
+      learner_stats:
+        allreduce_latency: 0.0
+        cur_lr: 0.0002
+        entropy: 1.4240843057632446
+        entropy_coeff: 0.01
+        grad_gnorm: 20.0
+        policy_loss: -8.074179649353027
+        total_loss: 2.6444034576416016
+        var_gnorm: 63.34788513183594
+        vf_explained_var: 0.5634429454803467
+        vf_loss: 35.678009033203125
+      model: {}
+      num_agent_steps_trained: 500.0
+      num_grad_updates_lifetime: 72.0
+  learner_queue:
+    size_count: 78
+    size_mean: 1.1
+    size_quantiles: [0.0, 0.0, 0.0, 4.0, 7.0]
+    size_std: 1.8027756377319948
+  num_agent_steps_sampled: 48200
+  num_agent_steps_trained: 36000
+  num_env_steps_sampled: 48200
+  num_env_steps_trained: 36000
+  num_samples_added_to_queue: 48000
+  num_training_step_calls_since_last_synch_worker_weights: 234
+  num_weight_broadcasts: 947
+  timing_breakdown:
+    learner_dequeue_time_ms: 4158.704
+    learner_grad_time_ms: 894.156
+    learner_load_time_ms: 21.4
+    learner_load_wait_time_ms: 17.204
+iterations_since_restore: 7
+node_ip: 127.0.0.1
+num_agent_steps_sampled: 48200
+num_agent_steps_trained: 36000
+num_env_steps_sampled: 48200
+num_env_steps_sampled_this_iter: 7350
+num_env_steps_sampled_throughput_per_sec: 734.9980723908433
+num_env_steps_trained: 36000
+num_env_steps_trained_this_iter: 5500
+num_env_steps_trained_throughput_per_sec: 549.9985575713794
+num_faulty_episodes: 0
+num_healthy_workers: 2
+num_in_flight_async_reqs: 4
+num_remote_worker_restarts: 0
+num_steps_trained_this_iter: 5500
+perf:
+  cpu_util_percent: 58.449999999999996
+  ram_util_percent: 82.66428571428571
+pid: 42354
+policy_reward_max: {}
+policy_reward_mean: {}
+policy_reward_min: {}
+sampler_perf:
+  mean_action_processing_ms: 0.11949685422433703
+  mean_env_render_ms: 0.0
+  mean_env_wait_ms: 0.0446366602012963
+  mean_inference_ms: 2.218900534990667
+  mean_raw_obs_processing_ms: 0.4931929705150634
+sampler_results:
+  connector_metrics:
+    ObsPreprocessorConnector_ms: 0.03655862808227539
+    StateBufferConnector_ms: 0.00655674934387207
+    ViewRequirementAgentConnector_ms: 0.2174673080444336
+  custom_metrics: {}
+  episode_len_mean: 128.0
+  episode_media: {}
+  episode_reward_max: 7.0
+  episode_reward_mean: 2.07
+  episode_reward_min: 0.0
+  episodes_this_iter: 57
+  hist_stats:
+    episode_lengths: [128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+      128, 128, 128, 128, 128, 128, 128, 128]
+    episode_reward: [3.0, 2.0, 0.0, 3.0, 1.0, 2.0, 2.0, 1.0, 1.0, 0.0, 2.0, 3.0, 4.0,
+      2.0, 2.0, 2.0, 4.0, 5.0, 1.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0,
+      3.0, 0.0, 1.0, 3.0, 2.0, 2.0, 3.0, 0.0, 2.0, 1.0, 1.0, 5.0, 1.0, 3.0, 0.0, 1.0,
+      2.0, 0.0, 0.0, 1.0, 4.0, 3.0, 3.0, 1.0, 6.0, 3.0, 6.0, 6.0, 3.0, 0.0, 4.0, 3.0,
+      1.0, 3.0, 2.0, 3.0, 3.0, 2.0, 2.0, 1.0, 1.0, 4.0, 0.0, 2.0, 6.0, 3.0, 0.0, 1.0,
+      3.0, 3.0, 2.0, 1.0, 1.0, 1.0, 3.0, 3.0, 2.0, 1.0, 6.0, 2.0, 2.0, 2.0, 3.0, 2.0,
+      7.0, 4.0, 0.0, 3.0, 1.0, 0.0, 4.0]
+  num_faulty_episodes: 0
+  policy_reward_max: {}
+  policy_reward_mean: {}
+  policy_reward_min: {}
+  sampler_perf:
+    mean_action_processing_ms: 0.11949685422433703
+    mean_env_render_ms: 0.0
+    mean_env_wait_ms: 0.0446366602012963
+    mean_inference_ms: 2.218900534990667
+    mean_raw_obs_processing_ms: 0.4931929705150634
+time_since_restore: 71.92721557617188
+time_this_iter_s: 10.241626977920532
+time_total_s: 71.92721557617188
+timers:
+  sample_time_ms: 0.03
+  synch_weights_time_ms: 0.009
+  training_iteration_time_ms: 0.088
+timestamp: 1691994102
+timesteps_total: 48200
+training_iteration: 7
+trial_id: default
+train step: 8
+Traceback (most recent call last):
+  File "/Users/sangbin/Impala/launch.py", line 318, in <module>
+    result = algo.train()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/tune/trainable/trainable.py", line 372, in train
+    result = self.step()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/algorithms/algorithm.py", line 853, in step
+    results, train_iter_ctx = self._run_one_training_iteration()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/algorithms/algorithm.py", line 2832, in _run_one_training_iteration
+    while not train_iter_ctx.should_stop(results):
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/algorithms/algorithm.py", line 3193, in should_stop
+    min_t = self.algo.config["min_time_s_per_iteration"]
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/algorithms/algorithm_config.py", line 3446, in __getitem__
+    def __getitem__(self, item):
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/Users/sangbin/Impala/launch.py", line 318, in <module>
+    result = algo.train()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/tune/trainable/trainable.py", line 372, in train
+    result = self.step()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/algorithms/algorithm.py", line 853, in step
+    results, train_iter_ctx = self._run_one_training_iteration()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/algorithms/algorithm.py", line 2832, in _run_one_training_iteration
+    while not train_iter_ctx.should_stop(results):
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/algorithms/algorithm.py", line 3193, in should_stop
+    min_t = self.algo.config["min_time_s_per_iteration"]
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ray/rllib/algorithms/algorithm_config.py", line 3446, in __getitem__
+    def __getitem__(self, item):
+KeyboardInterrupt

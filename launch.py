@@ -50,7 +50,13 @@ from ray.air.integrations.mlflow import MLflowLoggerCallback
 from ray.train.torch import TorchCheckpoint, TorchPredictor
 import time
 from ray.air.integrations.mlflow import setup_mlflow
+import mlflow
 from memory_maze import tasks
+import wandb
+import flatdict
+
+from collections.abc import MutableMapping
+
 
 tf1, tf, tfv = try_import_tf()
 SUPPORTED_ENVS = [
@@ -82,7 +88,7 @@ def get_cli_args():
         help="The DL framework specifier.",
     )
     parser.add_argument(
-        "--n-steps", type=int, default=100, help="Number of iterations to train."
+        "--n-steps", type=int, default=100000, help="Number of iterations to train."
     )
     '''
     parser.add_argument(
@@ -129,6 +135,16 @@ def mlflow_log_metrics(mlflow, metrics: dict, step: int):
         except:
             print('Error logging metrics - will retry.')
             time.sleep(10)
+
+def flatten_dict(d: MutableMapping, parent_key: str = '', sep: str ='/') -> MutableMapping:
+    items = []
+    for k, v in d.items():
+        new_key = parent_key + sep + k if parent_key else k
+        if isinstance(v, MutableMapping):
+            items.extend(flatten_dict(v, new_key, sep=sep).items())
+        else:
+            items.append((new_key, v))
+    return dict(items)
 
 def drawGraphWithAlgo(mlflow, envName, algo, test_len):
     # prepare env
@@ -180,7 +196,10 @@ def drawGraphWithAlgo(mlflow, envName, algo, test_len):
         mean_steps_per_task.append(sum(lst) / len(lst))
 
     for i in range(len(mean_steps_per_task)):
-        mlflow_log_metrics(mlflow, {"number_of_steps_to_goal": mean_steps_per_task[i]}, step=i+1)
+        if mlflow:
+            mlflow_log_metrics(mlflow, {"number_of_steps_to_goal": mean_steps_per_task[i]}, step=i+1)
+        else:
+            wandb.log({"number_of_steps_to_goal": mean_steps_per_task[i], 'custom_step': step})
     
     print(f'Drawing graph finished')
 
@@ -289,10 +308,18 @@ if __name__ == "__main__":
         if args.run != "IMPALA":
             raise ValueError("Only support --run IMPALA with --no-tune.")
         
-        import mlflow
+        '''
         experiment_name = "impala_GTrXl"
         mlflow.set_experiment(experiment_name)
         myMlflow = setup_mlflow(config.to_dict(), run_name = "memory_maze", experiment_name=experiment_name)
+        '''
+
+        wandb.init()
+        wandb.run.name = 'impala_GTrXl'
+        wandb.run.save()
+        wandb.define_metric("custom_step")
+        wandb.define_metric("*", step_metric="custom_step")
+
 
         algo = config.build()
         # run manual training loop and print results after each iteration
@@ -304,7 +331,12 @@ if __name__ == "__main__":
             result = algo.train()
             print(pretty_print(result)) 
             
-            myMlflow.log_metric('episode_reward_mean', result['episode_reward_mean'], step=step)
+            #myMlflow.log_metric('episode_reward_mean', result['episode_reward_mean'], step=step)
+            
+
+            fd = flatten_dict(result)
+            fd['custom_step'] = step
+            wandb.log(fd)
 
             '''
             # stop training if the target train steps or reward are reached
@@ -315,7 +347,7 @@ if __name__ == "__main__":
                 break
             '''
         
-        drawGraphWithAlgo(myMlflow, args.env, algo, 10)
+        drawGraphWithAlgo(None, args.env, algo, 10)
 
     # Run with Tune for auto env and algorithm creation and TensorBoard.
     else:
@@ -351,3 +383,4 @@ if __name__ == "__main__":
             check_learning_achieved(results, args.stop_reward)
 
     ray.shutdown()
+
