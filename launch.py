@@ -1,33 +1,3 @@
-"""
-Example of using an RL agent (default: PPO) with an AttentionNet model,
-which is useful for environments where state is important but not explicitly
-part of the observations.
-
-For example, in the "repeat after me" environment (default here), the agent
-needs to repeat an observation from n timesteps before.
-AttentionNet keeps state of previous observations and uses transformers to
-learn a policy that successfully repeats previous observations.
-Without attention, the RL agent only "sees" the last observation, not the one
-n timesteps ago and cannot learn to repeat this previous observation.
-
-AttentionNet paper: https://arxiv.org/abs/1506.07704
-
-This example script also shows how to train and test a PPO agent with an
-AttentionNet model manually, i.e., without using Tune.
-
----
-Run this example with defaults (using Tune and AttentionNet on the "repeat
-after me" environment):
-$ python attention_net.py
-Then run again without attention:
-$ python attention_net.py --no-attention
-Compare the learning curve on TensorBoard:
-$ cd ~/ray-results/; tensorboard --logdir .
-There will be a huge difference between the version with and without attention!
-
-Other options for running this example:
-$ python attention_net.py --help
-"""
 import argparse
 import os
 
@@ -271,7 +241,12 @@ if __name__ == "__main__":
             env_config={},
         )
         .training(
-            lr=0.0002, #tune.grid_search([0.0001, 0.0003]),
+            entropy_coeff = 0.001, # 0.01
+            gamma = 0.9, # 0.95
+            lr=0.00001, #0.0004
+            epsilon = 0.0001,
+            momentum = 0,
+            decay = 0.99,
             grad_clip=20.0,
             model={
                 "use_attention": True,
@@ -291,7 +266,7 @@ if __name__ == "__main__":
         .rollouts(num_envs_per_worker=1)
         .resources(
             # Use GPUs iff `RLLIB_NUM_GPUS` env var set to > 0.
-            num_gpus=int(os.environ.get("RLLIB_NUM_GPUS", 0))
+            num_gpus=int(os.environ.get("RLLIB_NUM_GPUS", 0)),
         )
         .rl_module(_enable_rl_module_api=False)
     )
@@ -304,6 +279,7 @@ if __name__ == "__main__":
 
     # Manual training loop (no Ray tune).
     if args.no_tune:
+
         # manual training loop using PPO and manually keeping track of state
         if args.run != "IMPALA":
             raise ValueError("Only support --run IMPALA with --no-tune.")
@@ -319,13 +295,11 @@ if __name__ == "__main__":
         wandb.run.save()
         wandb.define_metric("custom_step")
         wandb.define_metric("*", step_metric="custom_step")
-
-
+        
+        checkpoint_interval = 10
         algo = config.build()
         # run manual training loop and print results after each iteration
-        step = 0
-        for _ in range(args.n_steps):
-            step += 1
+        for step in range(1, args.n_steps+1):
             print("train step:", step)
 
             result = algo.train()
@@ -333,6 +307,15 @@ if __name__ == "__main__":
             
             #myMlflow.log_metric('episode_reward_mean', result['episode_reward_mean'], step=step)
             
+            if step % checkpoint_interval == 0:
+                path_to_checkpoint = algo.save()
+                print(
+                    "An Algorithm checkpoint has been created inside directory: "
+                    f"'{path_to_checkpoint}'."
+                )
+                wandb.save(path_to_checkpoint)
+                
+
 
             fd = flatten_dict(result)
             fd['custom_step'] = step
@@ -358,12 +341,8 @@ if __name__ == "__main__":
                 stop=stop, verbose=1,
                 name="mlflow",
                 callbacks=[
-                    MLflowLoggerCallback(
-                        experiment_name="impala",
-                        save_artifact=True,
-                    )
                 ],
-                #storage_path="./storage",
+                storage_path = "./ray_results", #/proj/internal_group/dscig/kdkyum/workdir/Impala/ray_results
             ),
         )
         results = tuner.fit()
