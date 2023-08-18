@@ -1,9 +1,10 @@
 #!/bin/sh
-#SBATCH -J IMPALA
+#SBATCH -J omg
 #SBATCH -N 1
-#SBATCH -n 1
+#SBATCH -n 4
+#SBATCH -c 4
 #SBATCH --gpus=1
-#SBATCH -p long
+#SBATCH -p jepyc
 #SBATCH -o %x.out
 #SBATCH -e %x.err
 #SBATCH -D /proj/internal_group/dscig/kdkyum/workdir/Impala

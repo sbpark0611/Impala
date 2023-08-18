@@ -342,7 +342,7 @@ if __name__ == "__main__":
                 name="mlflow",
                 callbacks=[
                 ],
-                storage_path = "/proj/internal_group/dscig/kdkyum/workdir/Impala/ray_results", #/proj/internal_group/dscig/kdkyum/workdir/Impala/ray_results
+                storage_path = "./ray_results", #/proj/internal_group/dscig/kdkyum/workdir/Impala/ray_results
             ),
         )
         results = tuner.fit()
