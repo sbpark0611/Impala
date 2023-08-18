@@ -15,4 +15,4 @@ conda activate pydreamer
 export WANDB_MODE=offline
 export PYTHONPATH='.'
 
-python launch.py --no-tune --env MemoryMaze
+python launch.py
