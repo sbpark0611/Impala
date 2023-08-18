@@ -1,1 +1,3 @@
 mlruns/
+wandb/
+ray_results/
