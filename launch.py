@@ -27,6 +27,8 @@ import flatdict
 
 from collections.abc import MutableMapping
 
+from ray.air.integrations.wandb import WandbLoggerCallback
+import shutil
 
 tf1, tf, tfv = try_import_tf()
 SUPPORTED_ENVS = [
@@ -81,7 +83,7 @@ def get_cli_args():
         "be achieved within --stop-timesteps AND --stop-iters.",
     )
     parser.add_argument(
-        "--no-tune",
+        "--tune",
         default=False,
         action="store_true",
         help="Run without Tune using a manual train loop instead. Here,"
@@ -278,7 +280,7 @@ if __name__ == "__main__":
     }
 
     # Manual training loop (no Ray tune).
-    if args.no_tune:
+    if not args.tune:
 
         # manual training loop using PPO and manually keeping track of state
         if args.run != "IMPALA":
@@ -313,7 +315,8 @@ if __name__ == "__main__":
                     "An Algorithm checkpoint has been created inside directory: "
                     f"'{path_to_checkpoint}'."
                 )
-                wandb.save(path_to_checkpoint)
+                shutil.make_archive(path_to_checkpoint, "zip", path_to_checkpoint)
+                wandb.save(f"{path_to_checkpoint}.zip")
                 
 
 
@@ -341,6 +344,10 @@ if __name__ == "__main__":
                 stop=stop, verbose=1,
                 name="mlflow",
                 callbacks=[
+                    WandbLoggerCallback(
+                        project="impala",
+                        save_checkpoints=True,
+                    )
                 ],
                 storage_path = "./ray_results", #/proj/internal_group/dscig/kdkyum/workdir/Impala/ray_results
             ),
