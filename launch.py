@@ -235,48 +235,5 @@ if __name__ == "__main__":
     registry.register_env("MemoryPlanningGame", lambda _: MemoryPlanningGame())
     registry.register_env("MemoryMaze", lambda _: tasks.memory_maze_9x9())
 
-    # main part: RLlib config with AttentionNet model
-    config = (
-        impala.ImpalaConfig()
-        .environment(
-            args.env,
-            env_config={},
-        )
-        .training(
-            entropy_coeff = 0.001, # 0.01
-            gamma = 0.9, # 0.95
-            lr=0.00001, #0.0004
-            epsilon = 0.0001,
-            momentum = 0,
-            decay = 0.99,
-            grad_clip=20.0,
-            model={
-                "use_attention": True,
-                "max_seq_len": 50,
-                "attention_num_transformer_units": 1,
-                "attention_dim": 128,
-                "attention_memory_inference": 100,
-                "attention_memory_training": 100,
-                "attention_num_heads": 1,
-                "attention_head_dim": 64,
-                "attention_position_wise_mlp_dim": 64,
-            },
-            # TODO (Kourosh): Enable when LSTMs are supported.
-            _enable_learner_api=False,
-        )
-        .framework(args.framework)
-        .rollouts(num_envs_per_worker=1)
-        .resources(
-            # Use GPUs iff `RLLIB_NUM_GPUS` env var set to > 0.
-            num_gpus=int(os.environ.get("RLLIB_NUM_GPUS", 0)),
-        )
-        .rl_module(_enable_rl_module_api=False)
-    )
-
-    stop = {
-        "training_iteration": args.n_steps,
-        #"timesteps_total": args.stop_timesteps,
-        #"episode_reward_mean": args.stop_reward,
-    }
     ray.shutdown()
 
