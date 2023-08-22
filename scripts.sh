@@ -1,8 +1,9 @@
 #!/bin/sh
 #SBATCH -J omg
 #SBATCH -N 1
-#SBATCH -n 1
-#SBATCH -c 1
+#SBATCH -n 4
+#SBATCH -c 4
+#SBATCH --gpus=1
 #SBATCH -p jepyc
 #SBATCH -o %x.out
 #SBATCH -e %x.err
