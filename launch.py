@@ -227,13 +227,5 @@ if __name__ == "__main__":
 
     ray.init(num_cpus=args.num_cpus or None, local_mode=args.local_mode)
 
-    # register custom environments
-    registry.register_env("RepeatAfterMeEnv", lambda c: RepeatAfterMeEnv(c))
-    registry.register_env("RepeatInitialObsEnv", lambda _: RepeatInitialObsEnv())
-    registry.register_env("LookAndPush", lambda _: OneHot(LookAndPush()))
-    registry.register_env("StatelessCartPole", lambda _: StatelessCartPole())
-    registry.register_env("MemoryPlanningGame", lambda _: MemoryPlanningGame())
-    registry.register_env("MemoryMaze", lambda _: tasks.memory_maze_9x9())
-
     ray.shutdown()
 
