@@ -235,7 +235,43 @@ if __name__ == "__main__":
     registry.register_env("MemoryMaze", lambda _: tasks.memory_maze_9x9())
 
     # main part: RLlib config with AttentionNet model
-    
+    config = (
+        impala.ImpalaConfig()
+        .environment(
+            args.env,
+            env_config={},
+        )
+        .training(
+            entropy_coeff = 0.001, # 0.01
+            gamma = 0.9, # 0.95
+            lr=0.00001, #0.0004
+            epsilon = 0.0001,
+            momentum = 0,
+            decay = 0.99,
+            grad_clip=20.0,
+            model={
+                "use_attention": True,
+                "max_seq_len": 50,
+                "attention_num_transformer_units": 1,
+                "attention_dim": 128,
+                "attention_memory_inference": 100,
+                "attention_memory_training": 100,
+                "attention_num_heads": 1,
+                "attention_head_dim": 64,
+                "attention_position_wise_mlp_dim": 64,
+            },
+            # TODO (Kourosh): Enable when LSTMs are supported.
+            _enable_learner_api=False,
+        )
+        .framework(args.framework)
+        .rollouts(num_envs_per_worker=1)
+        .resources(
+            # Use GPUs iff `RLLIB_NUM_GPUS` env var set to > 0.
+            num_gpus=int(os.environ.get("RLLIB_NUM_GPUS", 0)),
+        )
+        .rl_module(_enable_rl_module_api=False)
+    )
+
     stop = {
         "training_iteration": args.n_steps,
         #"timesteps_total": args.stop_timesteps,
@@ -262,14 +298,30 @@ if __name__ == "__main__":
         wandb.define_metric("*", step_metric="custom_step")
         
         checkpoint_interval = 10
+        algo = config.build()
         # run manual training loop and print results after each iteration
         for step in range(1, args.n_steps+1):
             print("train step:", step)
 
-            print(pretty_print()) 
+            result = algo.train()
+            print(pretty_print(result)) 
             
             #myMlflow.log_metric('episode_reward_mean', result['episode_reward_mean'], step=step)
             
+            if step % checkpoint_interval == 0:
+                path_to_checkpoint = algo.save()
+                print(
+                    "An Algorithm checkpoint has been created inside directory: "
+                    f"'{path_to_checkpoint}'."
+                )
+                shutil.make_archive(path_to_checkpoint, "zip", path_to_checkpoint)
+                wandb.save(f"{path_to_checkpoint}.zip")
+                
+
+
+            fd = flatten_dict(result)
+            fd['custom_step'] = step
+            wandb.log(fd)
 
             '''
             # stop training if the target train steps or reward are reached
@@ -279,6 +331,8 @@ if __name__ == "__main__":
             ):
                 break
             '''
+        
+        drawGraphWithAlgo(None, args.env, algo, 10)
 
     # Run with Tune for auto env and algorithm creation and TensorBoard.
     else:
