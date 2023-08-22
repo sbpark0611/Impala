@@ -221,9 +221,4 @@ def drawGraph(mlflow, envName, predictor, test_len):
 
 
 if __name__ == "__main__":
-    args = get_cli_args()
-    if args.env == "MemoryMaze":
-        os.environ['MUJOCO_GL'] = 'glfw'
-
-    ray.shutdown()
-
+    print("hello world")
