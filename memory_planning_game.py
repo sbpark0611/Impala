@@ -1,4 +1,4 @@
-# Copyright 2021 DeepMind Technologies Limited. All Rights Reserved.
+ # Copyright 2021 DeepMind Technologies Limited. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -48,7 +48,7 @@ class MemoryPlanningGame(gym.Env):
         num_labels=16,
         render_mode=None,
         maps=None,
-        dict_space=True,
+        dict_space=False,
         pretrain=False,
         no_duplication=True,
         seed=None,
@@ -81,9 +81,11 @@ class MemoryPlanningGame(gym.Env):
                     "position": spaces.Discrete(self._num_labels),
                     "goal": spaces.Discrete(self._num_labels),
                     "prev_action": spaces.Discrete(self.NUM_ACTIONS + 1),
-                    "reward": spaces.Discrete(2),
+                    "prev_position": spaces.Discrete(self._num_labels),
                 }
             )
+
+
         else:
             self.observation_space = spaces.MultiDiscrete(
                 [self._num_labels, self._num_labels, self.NUM_ACTIONS + 1, 2]
@@ -154,17 +156,17 @@ class MemoryPlanningGame(gym.Env):
                     ("goal", self.goal),
                     ("position", self.position),
                     ("prev_action", self.previous_action),
-                    ("reward", 1 if self.is_respawn else 0),
+                    ("prev_position", self._prev_position),
                 ]
             )
         
         else:
-            return [
+            return np.array([
                 self.position,
                 self.goal,
                 self.previous_action,
-                1 if self.is_respawn else 0,
-            ]
+                self._prev_position,
+            ])
 
     def _get_info(self):
         return {"episode_steps": self._episode_steps}
@@ -206,7 +208,7 @@ class MemoryPlanningGame(gym.Env):
         if self.render_mode == "human":
             self._render_frame()
 
-        return self._get_obs(), reward, done, False, self._get_info()
+        return self._get_obs(), reward, done, self._get_info()
 
     def reset(self, seed=None, options=None):
         super().reset(seed=seed)
@@ -251,7 +253,7 @@ class MemoryPlanningGame(gym.Env):
         if self.render_mode == "human":
             self._render_frame()
 
-        return self._get_obs(), self._get_info()
+        return self._get_obs()
 
     def _respawn(self):
         random_idx = self.np_random.integers(self._maze_size**2)

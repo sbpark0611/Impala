@@ -1,12 +1,11 @@
 import argparse
 import os
-os.environ['OPENBLAS_NUM_THREADS'] = '1'
-
 
 import numpy as np
 
 import ray
 from ray import air, tune
+from ray.rllib.algorithms import impala
 from ray.rllib.examples.env.look_and_push import LookAndPush, OneHot
 from ray.rllib.examples.env.repeat_after_me_env import RepeatAfterMeEnv
 from ray.rllib.examples.env.repeat_initial_obs_env import RepeatInitialObsEnv
